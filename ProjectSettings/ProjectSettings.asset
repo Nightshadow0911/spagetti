@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: a4dc9b79dcf9d984396b32a949c69289
+  productGUID: 97a9226f34ee8b54ca88c86583e40247
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: brickbreaker
+  productName: spagetti
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -814,14 +814,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: brickbreaker
+  metroPackageName: spagetti
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: brickbreaker
+  metroApplicationDescription: spagetti
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -889,10 +889,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 797464a1-76a9-47bb-a884-49876358036d
+  cloudProjectId: 2218f98c-b09a-4af8-b93f-f352bdd41bc3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: brickbreaker
+  projectName: spagetti (1)
   organizationId: whqudgh0911
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
