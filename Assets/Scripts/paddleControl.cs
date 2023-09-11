@@ -23,23 +23,18 @@ public class PaddleControl : MonoBehaviour //�е� ����
     {
         if (paddle != null) // 패들이 아직 생성되지 않았다면 업데이트하지 않습니다.
         {
-            Vector3 currentScale = paddle.transform.localScale; // 패들 객체의 스케일 가져오기
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 currentScale = playerPaddle.localScale;
+            float paddleHalfLength = currentScale.x / 2f;
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            float x = mousePos.x;
+            // X 축 위치를 마우스 포인터의 X 좌표로 고정
+            transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
 
-            float paddleHalfLength = currentScale.x / 2f; // 패들의 길이가 변해도 화면 밖으로 나가지 않음
-            if (x + paddleHalfLength > 8.9f)
-            {
-                x = 8.9f - paddleHalfLength;
-            }
-            if (x - paddleHalfLength < -8.9f)
-            {
-                x = -8.9f + paddleHalfLength;
-            }
+            // 화면 경계 내에 고정
+            float screenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+            float clampX = Mathf.Clamp(transform.position.x, -screenWidth + paddleHalfLength, screenWidth - paddleHalfLength);
 
-            // 패들 객체의 위치를 업데이트합니다.
-            paddle.transform.position = new Vector3(x, paddle.transform.position.y, 0);
+            transform.position = new Vector3(clampX, transform.position.y, transform.position.z);
         }
     }
     public void ChangeScale()
