@@ -12,6 +12,7 @@ public class StartSceneController : MonoBehaviour
     public Button startButton; 
     public GameObject difficultyPanel; 
     public Button difficultyButton; // 난이도 선택 버튼
+    
 
     private bool difficultyPanelVisible = false;
 
@@ -25,6 +26,7 @@ public class StartSceneController : MonoBehaviour
 
         nameButton.onClick.AddListener(ShowNameInputUI);      
         startButton.onClick.AddListener(StartGame);
+        
     }
     private void ToggleDifficultyPanel()
     {
@@ -45,8 +47,12 @@ public class StartSceneController : MonoBehaviour
         
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.Save(); 
-
-        // MainScene으로 전환
-        //SceneManager.LoadScene("SampleScene");
+       
+    }
+    public void ChangeToNextScene()
+    {
+        //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
+        string nextSceneName = "GameManagerScene";
+        FindObjectOfType<SceneFader>().FadeToScene(nextSceneName);
     }
 }
