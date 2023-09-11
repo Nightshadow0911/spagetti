@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ballControl : MonoBehaviour           //·£´ı¹æÇâ
+public class BallControl : MonoBehaviour           //ëœë¤ë°©í–¥
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -13,8 +13,10 @@ public class ballControl : MonoBehaviour           //·£´ı¹æÇâ
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-        randomDirection = new Vector2(1, 1).normalized; //°ø Ã³À½ ½ÃÀÛ¹æÇâ
+
+        randomDirection = new Vector2(1, 1).normalized; //ê³µ ì²˜ìŒ ì‹œì‘ë°©í–¥
         //randomDirection = Random.insideUnitCircle.normalized;
+
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -28,20 +30,20 @@ public class ballControl : MonoBehaviour           //·£´ı¹æÇâ
         transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
 
 
-        if (transform.position.x < -9 || transform.position.x > 9) //È­¸é ÁÂ¿ì¿Ü°û¿¡ ºÎµúÇûÀ»¶§ °øÀÌ Æ¨±â°Ô
+        if (transform.position.x < -9 || transform.position.x > 9) //í™”ë©´ ì¢Œìš°ì™¸ê³½ì— ë¶€ë”ªí˜”ì„ë•Œ ê³µì´ íŠ•ê¸°ê²Œ
         {
             randomDirection.x *= -1;
         }
 
-        if (transform.position.y > 5) //È­¸é À§ÂÊ ¿Ü°û¿¡ ºÎµúÇûÀ»¶§
+        if (transform.position.y > 5) //í™”ë©´ ìœ„ìª½ ì™¸ê³½ì— ë¶€ë”ªí˜”ì„ë•Œ
         {
             randomDirection.y *= -1;
         }
 
-        if(transform.position.y < -5) //È­¸é ¾Æ·¡ÂÊÀ¸·Î ¶³¾îÁ³À»¶§
+        if(transform.position.y < -5) //í™”ë©´ ì•„ë˜ìª½ìœ¼ë¡œ ë–¨ì–´ì¡Œì„ë•Œ
         {
-            randomDirection.y *= -1; //ÀÓ½Ã
-            //°øÀÌ ¾Æ·¡·Î ¶³¾îÁ³À»¶§ °ø »èÁ¦ ¹× Ã¼·Â °¨¼Ò Ç×¸ñ Ãß°¡
+            randomDirection.y *= -1; //ì„ì‹œ
+            //ê³µì´ ì•„ë˜ë¡œ ë–¨ì–´ì¡Œì„ë•Œ ê³µ ì‚­ì œ ë° ì²´ë ¥ ê°ì†Œ í•­ëª© ì¶”ê°€
         }
 
         if (isStopped)
@@ -91,14 +93,14 @@ public class ballControl : MonoBehaviour           //·£´ı¹æÇâ
 
     void HandleCollision(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) //º®µ¹°ú Ãæµ¹ÇßÀ»¶§ º®µ¹À» ÆÄ±«ÇÏ°í °øÀÇ ¹æÇâÀ» ¹İ´ë·Î
+        if (collision.gameObject.CompareTag("Brick")) //ë²½ëŒê³¼ ì¶©ëŒí–ˆì„ë•Œ ë²½ëŒì„ íŒŒê´´í•˜ê³  ê³µì˜ ë°©í–¥ì„ ë°˜ëŒ€ë¡œ
         {
             Destroy(collision.gameObject);
             randomDirection.x *= -1;
             randomDirection.y *= -1;
         }
 
-        if (collision.gameObject.CompareTag("Paddle")) //ÆĞµé°ú ºÎµúÇûÀ»¶§ °øÀÌ Æ¨°Ü³ª°¡µµ·Ï
+        if (collision.gameObject.CompareTag("Paddle")) //íŒ¨ë“¤ê³¼ ë¶€ë”ªí˜”ì„ë•Œ ê³µì´ íŠ•ê²¨ë‚˜ê°€ë„ë¡
         {
             randomDirection.y *= -1;
         }
