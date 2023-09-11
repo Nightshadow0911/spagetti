@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f5696ff94a1c2374c83603a939430262
+guid: fb0adf894128ca745b85869781071135
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - paddlePrefab: {fileID: 544477927332434618, guid: 016f6d7ec74fffa47b67f36ddc4022df, type: 3}
+  - brickPrefab: {fileID: 1972736065049854247, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
