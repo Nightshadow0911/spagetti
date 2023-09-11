@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BGM : 0'
+  m_text: 'BGM : 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 425520cde6c804172ac6fd9b2a65521d, type: 2}
   m_sharedMaterial: {fileID: 6279849719279849131, guid: 425520cde6c804172ac6fd9b2a65521d, type: 2}
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'SFX : 0'
+  m_text: 'SFX : 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 425520cde6c804172ac6fd9b2a65521d, type: 2}
   m_sharedMaterial: {fileID: 6279849719279849131, guid: 425520cde6c804172ac6fd9b2a65521d, type: 2}
@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1927,10 +1927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9773a5a6dfb0040baeb0e1a6fcd1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeText: {fileID: 1850153167932916461}
-  volumeSlider: {fileID: 7079956623572827950}
-  resolutionText: {fileID: 7335480790143532527}
-  resolutionSlider: {fileID: 2099778553514672129}
+  bgmText: {fileID: 1850153167932916461}
+  bgmSlider: {fileID: 7079956623572827950}
+  sfxText: {fileID: 7335480790143532527}
+  sfxSlider: {fileID: 2099778553514672129}
   closeButton: {fileID: 5716655397059194698}
   settingsButton: {fileID: 7485754558308778812}
   settingsObj: {fileID: 6785321826102502673}
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
