@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PaddleControl : MonoBehaviour
 {
     public Transform playerPaddle;
     void Start()
@@ -14,19 +14,39 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {
         Vector3 currentScale = playerPaddle.localScale;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float paddleHalfLength = currentScale.x / 2f;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        float x = mousePos.x;
+        // X 축 위치를 마우스 포인터의 X 좌표로 고정
+        transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
 
-        float paddleHalfLength = currentScale.x / 2f;    //패들의 길이가 변해도 화면 밖으로 나가지 않음
-        if (x + paddleHalfLength > 8.9f)
+        // 화면 경계 내에 고정
+        float screenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+        float clampX = Mathf.Clamp(transform.position.x, -screenWidth+ paddleHalfLength, screenWidth- paddleHalfLength);
+
+        transform.position = new Vector3(clampX, transform.position.y, transform.position.z);
+    }
+    public void ChangeScale()
+    {
+        float randomValue = Random.Range(0f, 1f);
+        Vector3 currentScale = transform.localScale;
+        if (playerPaddle.localScale.x == 1f)
         {
-            x = 8.9f - paddleHalfLength;
+            currentScale.x += 0.5f;
+            transform.localScale = currentScale;
         }
-        if (x - paddleHalfLength < -8.9f)
+        else
         {
-            x = -8.9f + paddleHalfLength;
+            if (randomValue < 0.5f)
+            {
+                currentScale.x += 0.5f;
+                transform.localScale = currentScale;
+            }
+            else
+            {
+                currentScale.x -= 0.5f;
+                transform.localScale = currentScale;
+            }
         }
-        transform.position = new Vector3(x, transform.position.y, 0);
     }
 }
