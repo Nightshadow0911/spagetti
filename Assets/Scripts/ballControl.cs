@@ -2,48 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class BallControll : MonoBehaviour               //¸¶¿ì½º¹æÇâ
-//{
-//    public Rigidbody2D ballRigidbody;
-//    public GameObject paddle;
-//    public float moveSpeed = 5f;
-//    private bool isStopped;
-
-//    void Start()
-//    {
-//        if (ballRigidbody != null)
-//        {
-//            ballRigidbody.velocity = Vector2.zero;
-//        }
-//        isStopped = true;
-//    }
-
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        if (!isStarted)
-//        {
-//            Transform paddleTransform = paddle.transform;
-//            float paddleXPosition = paddleTransform.position.x;
-//            transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
-//        }
-//        if (Input.GetMouseButtonDown(0))
-//        {
-//            isStopped = false;
-//            // ¸¶¿ì½º Å¬¸¯ÇÑ ÁöÁ¡ÀÇ À§Ä¡¸¦ °¡Á®¿É´Ï´Ù.
-//            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-//            targetPosition.z = 0f; // 2D °ÔÀÓ¿¡¼­´Â Z ÃàÀ» 0À¸·Î ¼³Á¤ÇÕ´Ï´Ù.
-
-//            // °øÀ» Å¬¸¯ÇÑ À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù.
-//            if (ballRigidbody != null)
-//            {
-//                Vector2 direction = (targetPosition - transform.position).normalized;
-//                ballRigidbody.velocity = direction * moveSpeed;
-//            }
-//        }
-//    }
-//}
-public class BallControl : MonoBehaviour           //·£´ı¹æÇâ
+public class BallControl : MonoBehaviour           //ëœë¤ë°©í–¥
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -54,10 +13,10 @@ public class BallControl : MonoBehaviour           //·£´ı¹æÇâ
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-        Transform paddleTransform = paddle.transform;
-        float paddleXPosition = paddleTransform.position.x;
-        transform.position = new Vector3(paddleXPosition, -3.5f, 0);   
-        randomDirection = Random.insideUnitCircle.normalized;
+
+        randomDirection = new Vector2(1, 1).normalized; //ê³µ ì²˜ìŒ ì‹œì‘ë°©í–¥
+        //randomDirection = Random.insideUnitCircle.normalized;
+
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -68,12 +27,32 @@ public class BallControl : MonoBehaviour           //·£´ı¹æÇâ
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+
+
+        if (transform.position.x < -9 || transform.position.x > 9) //í™”ë©´ ì¢Œìš°ì™¸ê³½ì— ë¶€ë”ªí˜”ì„ë•Œ ê³µì´ íŠ•ê¸°ê²Œ
+        {
+            randomDirection.x *= -1;
+        }
+
+        if (transform.position.y > 5) //í™”ë©´ ìœ„ìª½ ì™¸ê³½ì— ë¶€ë”ªí˜”ì„ë•Œ
+        {
+            randomDirection.y *= -1;
+        }
+
+        if(transform.position.y < -5) //í™”ë©´ ì•„ë˜ìª½ìœ¼ë¡œ ë–¨ì–´ì¡Œì„ë•Œ
+        {
+            randomDirection.y *= -1; //ì„ì‹œ
+            //ê³µì´ ì•„ë˜ë¡œ ë–¨ì–´ì¡Œì„ë•Œ ê³µ ì‚­ì œ ë° ì²´ë ¥ ê°ì†Œ í•­ëª© ì¶”ê°€
+        }
+
         if (isStopped)
         {
             Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
         }
+
         if (Input.GetMouseButtonDown(0))
         {
             isStopped = false;
@@ -84,27 +63,24 @@ public class BallControl : MonoBehaviour           //·£´ı¹æÇâ
             }
         }
     }
-    public void BallSpeedChange()
-    {
-        float randomValue = Random.Range(0f, 1f);
-        if (moveSpeed == 5f)
-        {
-            moveSpeed += 2f;
-        }
-        else
-        {
-            if (randomValue < 0.5f)
-            {
-                moveSpeed += 2f;
-            }
-            else
-            {
-                moveSpeed -= 2f;
-            }
-        }
-    }
-    public void MagneticBall()
-    {
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleCollision(collision);
+    }
+
+    void HandleCollision(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Brick")) //ë²½ëŒê³¼ ì¶©ëŒí–ˆì„ë•Œ ë²½ëŒì„ íŒŒê´´í•˜ê³  ê³µì˜ ë°©í–¥ì„ ë°˜ëŒ€ë¡œ
+        {
+            Destroy(collision.gameObject);
+            randomDirection.x *= -1;
+            randomDirection.y *= -1;
+        }
+
+        if (collision.gameObject.CompareTag("Paddle")) //íŒ¨ë“¤ê³¼ ë¶€ë”ªí˜”ì„ë•Œ ê³µì´ íŠ•ê²¨ë‚˜ê°€ë„ë¡
+        {
+            randomDirection.y *= -1;
+        }
     }
 }
