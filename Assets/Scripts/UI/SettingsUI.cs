@@ -7,32 +7,35 @@ using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text volumeText;
-    [SerializeField] private Slider volumeSlider;
-    [SerializeField] private TMP_Text resolutionText;
-    [SerializeField] private Slider resolutionSlider;
+    [SerializeField] private TMP_Text bgmText;
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private TMP_Text sfxText;
+    [SerializeField] private Slider sfxSlider;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private GameObject settingsObj;
 
     private void Start()
     {
-        volumeSlider.onValueChanged.AddListener(ChangeVolumeText);
-        resolutionSlider.onValueChanged.AddListener(ChangeResolutionText);
+        bgmSlider.onValueChanged.AddListener(SoundManager.Instance.SetBGMVolume);
+        bgmSlider.onValueChanged.AddListener(ChangeBGMText);
+        sfxSlider.onValueChanged.AddListener(SoundManager.Instance.SetSFXVolume);
+        sfxSlider.onValueChanged.AddListener(ChangeSFXText);
+
         closeButton.onClick.AddListener(CloseSettings);
         settingsButton.onClick.AddListener(OpenSettings);
 
         settingsObj.SetActive(false);
     }
 
-    private void ChangeResolutionText(float ratio)
+    private void ChangeBGMText(float ratio)
     {
-         volumeText.text = $"Volume : {(int)(ratio * 100)}";
+        bgmText.text = $"BGM : {(int)(ratio * 100)}";
     }
 
-    private void ChangeVolumeText(float ratio)
+    private void ChangeSFXText(float ratio)
     {
-        resolutionText.text = $"Resolution : {(int)(ratio * 100)}";
+        sfxText.text = $"SFX : {(int)(ratio * 100)}";
     }
 
     private void CloseSettings()

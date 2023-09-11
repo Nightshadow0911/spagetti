@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class PaddleControl : MonoBehaviour
 {
-    public GameObject paddlePrefab; // ÆĞµé ÇÁ¸®ÆÕ¿¡ ´ëÇÑ ÂüÁ¶
-    public float paddleSpeed = 5f; // ÆĞµéÀÇ ÀÌµ¿ ¼Óµµ
-   public GameObject paddle; // »ı¼ºµÈ ÆĞµé¿¡ ´ëÇÑ ÂüÁ¶
+    public GameObject paddlePrefab; // íŒ¨ë“¤ í”„ë¦¬íŒ¹ì— ëŒ€í•œ ì°¸ì¡°
+    public float paddleSpeed = 5f; // íŒ¨ë“¤ì˜ ì´ë™ ì†ë„
+   public GameObject paddle; // ìƒì„±ëœ íŒ¨ë“¤ì— ëŒ€í•œ ì°¸ì¡°
 
     void Start()
     {
-        // ÆĞµéÀ» »ı¼ºÇÏ°í ÃÊ±â À§Ä¡¿¡ ¹èÄ¡ÇÕ´Ï´Ù.
+        // íŒ¨ë“¤ì„ ìƒì„±í•˜ê³  ì´ˆê¸° ìœ„ì¹˜ì— ë°°ì¹˜í•©ë‹ˆë‹¤.
         paddle = Instantiate(paddlePrefab, transform.position, Quaternion.identity);
     }
 
     void Update()
     {
-        if (paddle != null) // ÆĞµéÀÌ ¾ÆÁ÷ »ı¼ºµÇÁö ¾Ê¾Ò´Ù¸é ¾÷µ¥ÀÌÆ®ÇÏÁö ¾Ê½À´Ï´Ù.
+        if (paddle != null) // íŒ¨ë“¤ì´ ì•„ì§ ìƒì„±ë˜ì§€ ì•Šì•˜ë‹¤ë©´ ì—…ë°ì´íŠ¸í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         {
-            Vector3 currentScale = paddle.transform.localScale; // ÆĞµé °´Ã¼ÀÇ ½ºÄÉÀÏ °¡Á®¿À±â
+            Vector3 currentScale = paddle.transform.localScale; // íŒ¨ë“¤ ê°ì²´ì˜ ìŠ¤ì¼€ì¼ ê°€ì ¸ì˜¤ê¸°
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             float x = mousePos.x;
 
-            float paddleHalfLength = currentScale.x / 2f; // ÆĞµéÀÇ ±æÀÌ°¡ º¯ÇØµµ È­¸é ¹ÛÀ¸·Î ³ª°¡Áö ¾ÊÀ½
+            float paddleHalfLength = currentScale.x / 2f; // íŒ¨ë“¤ì˜ ê¸¸ì´ê°€ ë³€í•´ë„ í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ì§€ ì•ŠìŒ
             if (x + paddleHalfLength > 8.9f)
             {
                 x = 8.9f - paddleHalfLength;
@@ -33,7 +33,7 @@ public class PaddleControl : MonoBehaviour
                 x = -8.9f + paddleHalfLength;
             }
 
-            // ÆĞµé °´Ã¼ÀÇ À§Ä¡¸¦ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
+            // íŒ¨ë“¤ ê°ì²´ì˜ ìœ„ì¹˜ë¥¼ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
             paddle.transform.position = new Vector3(x, paddle.transform.position.y, 0);
         }
     }
