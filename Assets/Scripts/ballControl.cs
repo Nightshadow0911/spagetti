@@ -61,7 +61,29 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
             }
         }
     }
+    public void BallSpeedChange()
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (moveSpeed == 5f)
+        {
+            moveSpeed += 2f;
+        }
+        else
+        {
+            if (randomValue < 0.5f)
+            {
+                moveSpeed += 2f;
+            }
+            else
+            {
+                moveSpeed -= 2f;
+            }
+        }
+    }
+    public void MagneticBall()
+    {
 
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
