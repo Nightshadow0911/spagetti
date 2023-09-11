@@ -29,6 +29,8 @@ public class ResultUI : MonoBehaviour
         resultObj.SetActive(false);
     }
 
+    
+
     private void ShowEndUI(bool isClear)
     {
         // 플레이어 네임 표시
