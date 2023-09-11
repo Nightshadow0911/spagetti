@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class ballControll : MonoBehaviour               //마우스방향
+//public class BallControll : MonoBehaviour               //마우스방향
 //{
 //    public Rigidbody2D ballRigidbody;
 //    public GameObject paddle;
@@ -43,7 +43,7 @@ using UnityEngine;
 //        }
 //    }
 //}
-public class ballControll : MonoBehaviour           //랜덤방향
+public class BallControl : MonoBehaviour           //랜덤방향
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -54,6 +54,9 @@ public class ballControll : MonoBehaviour           //랜덤방향
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
+        Transform paddleTransform = paddle.transform;
+        float paddleXPosition = paddleTransform.position.x;
+        transform.position = new Vector3(paddleXPosition, -3.5f, 0);   
         randomDirection = Random.insideUnitCircle.normalized;
         if (ballRigidbody != null)
         {
@@ -80,5 +83,28 @@ public class ballControll : MonoBehaviour           //랜덤방향
                 ballRigidbody.velocity = randomDirection * moveSpeed;
             }
         }
+    }
+    public void BallSpeedChange()
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (moveSpeed == 5f)
+        {
+            moveSpeed += 2f;
+        }
+        else
+        {
+            if (randomValue < 0.5f)
+            {
+                moveSpeed += 2f;
+            }
+            else
+            {
+                moveSpeed -= 2f;
+            }
+        }
+    }
+    public void MagneticBall()
+    {
+
     }
 }
