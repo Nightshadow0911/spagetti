@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
-public class BallControl : MonoBehaviour           //��������
+public class BallControl : MonoBehaviour
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -18,8 +18,7 @@ public class BallControl : MonoBehaviour           //��������
         _initPos = transform.position;
 
         ballRigidbody = GetComponent<Rigidbody2D>();
-        randomDirection = new Vector2(1, 1).normalized; //�� ó�� ���۹���
-        //randomDirection = Random.insideUnitCircle.normalized;
+        randomDirection = new Vector2(1, 1).normalized;
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -31,25 +30,6 @@ public class BallControl : MonoBehaviour           //��������
     // Update is called once per frame
     void Update()
     {
-
-        if (transform.position.x < -9 || transform.position.x > 9) //ȭ�� �¿�ܰ��� �ε������� ���� ƨ���
-        {
-            randomDirection.x *= -1;
-        }
-
-        if (transform.position.y > 5) //ȭ�� ���� �ܰ��� �ε�������
-        {
-            randomDirection.y *= -1;
-        }
-
-        if(transform.position.y < -5) //ȭ�� �Ʒ������� ����������
-        {
-            //Destroy(gameObject); //�� ����
-            GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
-            Reset();
-
-        }
-
         if (isStopped)
         {
             Transform paddleTransform = paddle.transform;
@@ -69,16 +49,6 @@ public class BallControl : MonoBehaviour           //��������
         {
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
-
-        /*if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
-        {
-            isStopped = false;
-
-            if (ballRigidbody != null)
-            {
-                ballRigidbody.velocity = randomDirection * moveSpeed;
-            }
-        }*/
     }
 
     private void Reset()
@@ -97,7 +67,7 @@ public class BallControl : MonoBehaviour           //��������
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);
-        if (moveSpeed == 5f)
+        if (moveSpeed == 10f)
         {
             moveSpeed += 2f;
         }
@@ -124,7 +94,7 @@ public class BallControl : MonoBehaviour           //��������
 
     void HandleCollision(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) //������ �浹������ ������ �ı��ϰ� ���� ƨ�ܳ�������
+        if (collision.gameObject.CompareTag("Brick"))
         {
             Destroy(collision.gameObject);
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
@@ -135,9 +105,23 @@ public class BallControl : MonoBehaviour           //��������
             randomDirection = reflectionDirection.normalized;
         }
 
-        if (collision.gameObject.CompareTag("Paddle")) //�е�� �ε������� ���� ƨ�ܳ�������
+        if (collision.gameObject.CompareTag("Paddle"))
         {
             randomDirection.y *= -1;
+        }
+
+        if (collision.gameObject.CompareTag("horizontal"))
+        {
+            randomDirection.y *= -1;
+        }
+        if (collision.gameObject.CompareTag("vertical"))
+        {
+            randomDirection.x *= -1;
+        }
+        if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
+        {
+            Destroy(gameObject);
+            GameManager.Instance.DecreaseLife();
         }
     }
 }
