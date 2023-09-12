@@ -22,7 +22,15 @@ public class SceneFader : MonoBehaviour
 
     private void Awake()
     {
-        _instance = this;
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -51,6 +59,8 @@ public class SceneFader : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
+
+        OnLoadSceneByIndex(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator FadeOut(int sceneIndex)
@@ -68,8 +78,29 @@ public class SceneFader : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(sceneIndex);
+        var async = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
+        OnLoadSceneByIndex(sceneIndex);
     }
 
-
+    private void OnLoadSceneByIndex(int sceneIndex)
+    {
+        switch ((SceneType)sceneIndex)
+        {
+            case SceneType.StartScene:
+                SoundManager.Instance.PlayBGM(BGM.MainMenu);
+                break;
+            case SceneType.Juchan_MainSceneClone:
+                SoundManager.Instance.PlayBGM(BGM.InGame);
+                break;
+            case SceneType.CreditScene:
+                // Å©·¹µ÷ À½¾Ç
+                break;
+        }
+    }
 }
