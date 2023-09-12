@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
-public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
+public class ballControl : MonoBehaviour           //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -13,7 +14,7 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-        randomDirection = new Vector2(1, 1).normalized; //°ø Ã³À½ ½ÃÀÛ¹æÇâ
+        randomDirection = new Vector2(1, 1).normalized; //ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½ï¿½ï¿½
         //randomDirection = Random.insideUnitCircle.normalized;
         if (ballRigidbody != null)
         {
@@ -28,20 +29,21 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
         transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
 
 
-        if (transform.position.x < -9 || transform.position.x > 9) //È­¸é ÁÂ¿ì¿Ü°û¿¡ ºÎµúÇûÀ»¶§ °øÀÌ Æ¨±â°Ô
+        if (transform.position.x < -9 || transform.position.x > 9) //È­ï¿½ï¿½ ï¿½Â¿ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ¨ï¿½ï¿½ï¿½
         {
             randomDirection.x *= -1;
         }
 
-        if (transform.position.y > 5) //È­¸é À§ÂÊ ¿Ü°û¿¡ ºÎµúÇûÀ»¶§
+        if (transform.position.y > 5) //È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             randomDirection.y *= -1;
         }
 
-        if(transform.position.y < -5) //È­¸é ¾Æ·¡ÂÊÀ¸·Î ¶³¾îÁ³À»¶§
+        if(transform.position.y < -5) //È­ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            Destroy(gameObject); //°ø Á¦°Å
-            GameManager.Instance.DecreaseLife();//Ã¼·Â °¨¼Ò ½ºÅ©¸³Æ® Àç»ý
+
+            Destroy(gameObject); //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            GameManager.Instance.DecreaseLife();//Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
         }
 
         if (isStopped)
@@ -51,7 +53,7 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
         }
 
-        if (Input.GetMouseButtonDown(0)) //¸¶¿ì½ºµû¶ó ¿òÁ÷ÀÌµµ·Ï
+        if (Input.GetMouseButtonDown(0)) //ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½
         {
             isStopped = false;
 
@@ -91,7 +93,7 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
 
     void HandleCollision(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) //º®µ¹°ú Ãæµ¹ÇßÀ»¶§ º®µ¹À» ÆÄ±«ÇÏ°í °øÀÌ Æ¨°Ü³ª°¡µµ·Ï
+        if (collision.gameObject.CompareTag("Brick")) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ¨ï¿½Ü³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             Destroy(collision.gameObject);
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
@@ -102,7 +104,7 @@ public class ballControl : MonoBehaviour           //·£´ý¹æÇâ
             randomDirection = reflectionDirection.normalized;
         }
 
-        if (collision.gameObject.CompareTag("Paddle")) //ÆÐµé°ú ºÎµúÇûÀ»¶§ °øÀÌ Æ¨°Ü³ª°¡µµ·Ï
+        if (collision.gameObject.CompareTag("Paddle")) //ï¿½Ðµï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ¨ï¿½Ü³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             randomDirection.y *= -1;
         }
