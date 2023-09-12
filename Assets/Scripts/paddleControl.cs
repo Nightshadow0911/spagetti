@@ -13,11 +13,11 @@ public class PaddleControl : MonoBehaviour //�е� ����
   public Transform playerPaddle;
 
 
-    void Start()
-    {
-        // 패들을 생성하고 초기 위치에 배치합니다.
-        paddle = Instantiate(paddlePrefab, transform.position, Quaternion.identity);
-    }
+    //void Start()
+    //{
+    //    // 패들을 생성하고 초기 위치에 배치합니다.
+    //    paddle = Instantiate(paddlePrefab, transform.position, Quaternion.identity);
+    //}
 
     void Update()
     {
