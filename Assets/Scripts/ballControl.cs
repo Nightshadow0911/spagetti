@@ -11,8 +11,12 @@ public class BallControl : MonoBehaviour           //랜덤방향
     private Vector2 randomDirection;
     private bool isStopped;
 
+    private Vector2 _initPos;
+
     void Start()
     {
+        _initPos = transform.position;
+
         ballRigidbody = GetComponent<Rigidbody2D>();
 
         randomDirection = new Vector2(1, 1).normalized; //공 처음 시작방향
@@ -22,7 +26,8 @@ public class BallControl : MonoBehaviour           //랜덤방향
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-        isStopped = true;
+
+        Reset();
     }
 
     // Update is called once per frame
@@ -42,7 +47,7 @@ public class BallControl : MonoBehaviour           //랜덤방향
         {
             //Destroy(gameObject); //�� ����
             GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
-
+            Reset();
         }
 
         if (isStopped)
@@ -52,7 +57,7 @@ public class BallControl : MonoBehaviour           //랜덤방향
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
             if (Input.GetMouseButtonDown(0))
             {
-                isStopped = false;
+                Shoot();
 
                 //if (ballRigidbody != null)
                 //{
@@ -67,6 +72,20 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
         
     }
+
+    private void Reset()
+    {
+        isStopped = true;
+        transform.parent = paddle.transform;
+        transform.position = _initPos;
+    }
+
+    private void Shoot()
+    {
+        isStopped = false;
+        transform.parent = null;
+    }
+
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);

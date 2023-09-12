@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -16,7 +17,6 @@ public class GameManager : MonoBehaviour
     public int MaxLifeBarCount { get; private set; } = 4;
     [field: SerializeField]
     public int Life { get; private set; } = 2;
-    public Action OnResetCallback;
 
     public string PlayerName { get; private set; }
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         SetPlayerName();
-
+        Time.timeScale = 1.0f;
     }
 
 
@@ -65,14 +65,13 @@ public class GameManager : MonoBehaviour
     {
         Life--;
 
+        UIManager.Instance.CallLifeChanged(false);
+
         if (Life <= 0)
         {
             GameOver();
             return;
         }
-
-        UIManager.Instance.CallLifeChanged(false);
-        Reset();
     }
 
     // 목숨 증가 아이템 먹었을 때 연동
@@ -97,16 +96,13 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         UIManager.Instance.CallGameEnded(true);
-    }
-
-    private void Reset()
-    {
-        OnResetCallback?.Invoke();
+        Time.timeScale = 0;
     }
 
     private void GameOver()
     {
         // 게임 종료
         UIManager.Instance.CallGameEnded(false);
+        Time.timeScale = 0;
     }
 }

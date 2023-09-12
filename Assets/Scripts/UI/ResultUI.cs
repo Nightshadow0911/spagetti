@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
@@ -17,13 +18,9 @@ public class ResultUI : MonoBehaviour
 
     void Start()
     {
-        // TODO : 씬 매니저로 옮겨서 등록
-        // 다시하기
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //retryButton.onClick.AddListener()
-        //mainMenuButton.onClick.AddListener();
-        //nextStageButton.onClick.AddListener();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        retryButton.onClick.AddListener(() => SceneFader.Instance.FadeToScene(SceneManager.GetActiveScene().buildIndex));
+        mainMenuButton.onClick.AddListener(() => SceneFader.Instance.FadeToScene((int)SceneType.StartScene));
+        nextStageButton.onClick.AddListener(() => SceneFader.Instance.ChangeToNextScene());
 
         UIManager.Instance.OnGameEnded += ShowEndUI;
         resultObj.SetActive(false);
@@ -33,6 +30,8 @@ public class ResultUI : MonoBehaviour
 
     private void ShowEndUI(bool isClear)
     {
+        resultObj.SetActive(true);
+
         // 플레이어 네임 표시
         nameText.text = GameManager.Instance.PlayerName;
         // Score
