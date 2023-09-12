@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
-public class BallControl : MonoBehaviour           //랜덤방향
+public class ballControl : MonoBehaviour           //��������
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
@@ -14,10 +14,8 @@ public class BallControl : MonoBehaviour           //랜덤방향
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-
-        randomDirection = new Vector2(1, 1).normalized; //공 처음 시작방향
+        randomDirection = new Vector2(1, 1).normalized; //�� ó�� ���۹���
         //randomDirection = Random.insideUnitCircle.normalized;
-
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -28,21 +26,24 @@ public class BallControl : MonoBehaviour           //랜덤방향
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -9 || transform.position.x > 9) //화면 좌우외곽에 부딪혔을때 공이 튕기게
+        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+
+
+        if (transform.position.x < -9 || transform.position.x > 9) //ȭ�� �¿�ܰ��� �ε������� ���� ƨ���
         {
             randomDirection.x *= -1;
         }
 
-        if (transform.position.y > 5) //화면 위쪽 외곽에 부딪혔을때
+        if (transform.position.y > 5) //ȭ�� ���� �ܰ��� �ε�������
         {
             randomDirection.y *= -1;
         }
 
-        if(transform.position.y < -5) //화면 아래쪽으로 떨어졌을때
+        if(transform.position.y < -5) //ȭ�� �Ʒ������� ����������
         {
-            //Destroy(gameObject); //�� ����
-            GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
 
+            Destroy(gameObject); //�� ����
+            GameManager.Instance.DecreaseLife();//ü�� ���� ��ũ��Ʈ ���
         }
 
         if (isStopped)
@@ -50,22 +51,17 @@ public class BallControl : MonoBehaviour           //랜덤방향
             Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
-            if (Input.GetMouseButtonDown(0))
-            {
-                isStopped = false;
+        }
 
-                //if (ballRigidbody != null)
-                //{
-                //    ballRigidbody.velocity = randomDirection * moveSpeed;
-                //}
+        if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
+        {
+            isStopped = false;
+
+            if (ballRigidbody != null)
+            {
+                ballRigidbody.velocity = randomDirection * moveSpeed;
             }
         }
-        else
-        {
-            transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-        }
-
-        
     }
     public void BallSpeedChange()
     {
@@ -97,14 +93,18 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
     void HandleCollision(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) //벽돌과 충돌했을때 벽돌을 파괴하고 공의 방향을 반대로
+        if (collision.gameObject.CompareTag("Brick")) //������ �浹������ ������ �ı��ϰ� ���� ƨ�ܳ�������
         {
             Destroy(collision.gameObject);
-            randomDirection.x *= -1;
-            randomDirection.y *= -1;
+            Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
+            Vector2 normalVector = collision.contacts[0].normal;
+            float incidenceAngle = Vector2.Angle(randomDirection, -collisionVector);
+            float reflectionAngle = 2 * incidenceAngle;
+            Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
+            randomDirection = reflectionDirection.normalized;
         }
 
-        if (collision.gameObject.CompareTag("Paddle")) //패들과 부딪혔을때 공이 튕겨나가도록
+        if (collision.gameObject.CompareTag("Paddle")) //�е�� �ε������� ���� ƨ�ܳ�������
         {
             randomDirection.y *= -1;
         }
