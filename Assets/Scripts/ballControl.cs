@@ -30,11 +30,6 @@ public class BallControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-
-
         if (isStopped)
         {
             Transform paddleTransform = paddle.transform;
@@ -54,11 +49,13 @@ public class BallControl : MonoBehaviour
         {
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
+    }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            isStopped = false;
-        }
+    private void Reset()
+    {
+        isStopped = true;
+        transform.parent = paddle.transform;
+        transform.position = _initPos;
     }
 
     private void Shoot()
