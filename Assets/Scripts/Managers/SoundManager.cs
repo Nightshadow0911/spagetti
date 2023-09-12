@@ -53,7 +53,6 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         Init();
-        PlayBGM(BGM.InGame);
     }
 
     private void Init()
