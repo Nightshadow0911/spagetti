@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PaddleControl : MonoBehaviour //패들 관련
 {
-    public GameObject paddlePrefab; // 패들 프리팹에 대한 참조
+
     public float paddleSpeed = 5f; // 패들의 이동 속도
     public GameObject paddle; // 생성된 패들에 대한 참조
     public Transform playerPaddle;

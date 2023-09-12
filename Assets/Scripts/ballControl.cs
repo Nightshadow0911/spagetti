@@ -41,7 +41,7 @@ public class ballControl : MonoBehaviour           //랜덤방향
         if(transform.position.y < -5) //화면 아래쪽으로 떨어졌을때
         {
             Destroy(gameObject); //공 제거
-            GameManager.Instance.DecreaseLife();//체력 감소 항목 추가
+            GameManager.Instance.DecreaseLife();//체력 감소 스크립트 재생
         }
 
         if (isStopped)
@@ -51,7 +51,7 @@ public class ballControl : MonoBehaviour           //랜덤방향
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //마우스따라 움직이도록
         {
             isStopped = false;
 
@@ -91,11 +91,26 @@ public class ballControl : MonoBehaviour           //랜덤방향
 
     void HandleCollision(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) //벽돌과 충돌했을때 벽돌을 파괴하고 공의 방향을 반대로
+        if (collision.gameObject.CompareTag("Brick")) //벽돌과 충돌했을때 벽돌을 파괴하고 공이 튕겨나가도록
         {
             Destroy(collision.gameObject);
-            randomDirection.x *= -1;
-            randomDirection.y *= -1;
+            // 벽돌의 중심과 충돌 지점을 연결한 벡터
+            Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
+
+            // 법선 벡터 (벽돌 표면의 방향)
+            Vector2 normalVector = collision.contacts[0].normal;
+
+            // 입사각 계산
+            float incidenceAngle = Vector2.Angle(randomDirection, -collisionVector);
+
+            // 반사 각도 계산 (정반사)
+            float reflectionAngle = 2 * incidenceAngle;
+
+            // 반사 방향 벡터 계산
+            Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
+
+            // 새로운 방향으로 공의 이동 방향 설정
+            randomDirection = reflectionDirection.normalized;
         }
 
         if (collision.gameObject.CompareTag("Paddle")) //패들과 부딪혔을때 공이 튕겨나가도록

@@ -11,16 +11,22 @@ public class GameManager : MonoBehaviour
 
     public int Score { get; private set; }
     public int HighScore { get; private set; }
-
-    [fiel
-        : SerializeField]
     public int MaxLifeBarCount { get; private set; } = 4;
     [field: SerializeField]
     public int Life { get; private set; } = 2;
-
     public string PlayerName { get; private set; }
 
     private const string HIGH_SCORE = "HighScore";
+
+    public GameObject Brick;
+
+    public int rows = 5; // 벽돌 행, 세로
+
+    public int columns = 14; // 벽돌 열, 가로
+
+    public float xbrickSpacing = 1.2f; // 가로 벽돌 간격
+
+    public float ybrickSpacing = 0.5f; // 세로 벽돌 간격
 
 
     private void Awake()
@@ -31,6 +37,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Init();
+        MakeBricks();
+    }
+    public void MakeBricks()
+    {
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                float x = j * xbrickSpacing;
+                float y = i * ybrickSpacing;
+                Vector3 brickPosition = new Vector3(x - 7.8f, y + 2.0f, 0);
+
+                GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
+                BrickControl brickControl = brick.GetComponent<BrickControl>();
+
+                if (brickControl != null)
+                {
+                    brickControl.InitializeBrick(brickPosition); // 벽돌의 위치를 전달하여 초기화
+                }
+            }
+        }
     }
 
     private void Init()

@@ -247,7 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5696ff94a1c2374c83603a939430262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddlePrefab: {fileID: 0}
   paddleSpeed: 5
   paddle: {fileID: 0}
   playerPaddle: {fileID: 0}
@@ -375,10 +374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5696ff94a1c2374c83603a939430262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddlePrefab: {fileID: 0}
   paddleSpeed: 5
   paddle: {fileID: 1039991257}
-  playerPaddle: {fileID: 0}
+  playerPaddle: {fileID: 1039991260}
 --- !u!1 &1717051611
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,8 +458,8 @@ Transform:
   m_GameObject: {fileID: 1717051611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.57, y: -0.76, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.02, y: -3, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -525,7 +523,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &1717051617
@@ -540,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be3b5e22c548304fa395f4e0e85c22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballRigidbody: {fileID: 0}
+  ballRigidbody: {fileID: 1717051616}
   paddle: {fileID: 0}
   moveSpeed: 5
 --- !u!1 &1841336858
@@ -584,67 +582,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1841336858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9123df3225182f54a8249ad9396e314a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b27fa89adaac7f4c8589555c06fa3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2062211834
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1972736065049854247, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_Name
-      value: Brick
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706384749552986525, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4052179968397226451, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
+  <Life>k__BackingField: 2
+  Brick: {fileID: 1972736065049854247, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
+  rows: 5
+  columns: 14
+  xbrickSpacing: 1.2
+  ybrickSpacing: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -653,4 +599,3 @@ SceneRoots:
   - {fileID: 1841336860}
   - {fileID: 1039991260}
   - {fileID: 1717051614}
-  - {fileID: 2062211834}
