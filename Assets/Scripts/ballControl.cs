@@ -31,8 +31,6 @@ public class ballControl : MonoBehaviour           //��������
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-
 
         if (transform.position.x < -9 || transform.position.x > 9) //ȭ�� �¿�ܰ��� �ε������� ���� ƨ���
         {
@@ -67,8 +65,12 @@ public class ballControl : MonoBehaviour           //��������
                 //}
             }
         }
+        else
+        {
+            transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+        }
 
-        if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
+        /*if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
         {
             isStopped = false;
 
@@ -76,7 +78,7 @@ public class ballControl : MonoBehaviour           //��������
             {
                 ballRigidbody.velocity = randomDirection * moveSpeed;
             }
-        }
+        }*/
     }
 
     private void Reset()
