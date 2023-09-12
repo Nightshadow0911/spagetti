@@ -48,7 +48,7 @@ public class ResultUI : MonoBehaviour
         
         while (ratio < 1)
         {
-            ratio += Time.deltaTime / scoreIncreasingTime;
+            ratio += Time.unscaledDeltaTime / scoreIncreasingTime;
             ratio = Mathf.Clamp01(ratio);
             text.text = ((int)Mathf.Lerp(ratio * score, score, ratio)).ToString();
             yield return null;

@@ -5,6 +5,8 @@ using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class BallControl : MonoBehaviour
 {
+    [SerializeField] private int score = 100;
+
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
     public float moveSpeed = 5f;
@@ -103,6 +105,8 @@ public class BallControl : MonoBehaviour
             float reflectionAngle = 2 * incidenceAngle;
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
             randomDirection = reflectionDirection.normalized;
+
+            GameManager.Instance.AddScore(score);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))
@@ -120,7 +124,7 @@ public class BallControl : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
         {
-            Destroy(gameObject);
+            Reset();
             GameManager.Instance.DecreaseLife();
         }
     }
