@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0adf894128ca745b85869781071135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickPrefab: {fileID: 1972736065049854247}
+  brickPrefab: {fileID: 0}
   startPosition: {x: -8, y: 4}
   brickWidth: 1
   brickHeight: 0.5
