@@ -12,15 +12,26 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
     public int HighScore { get; private set; }
 
-    [fiel
-        : SerializeField]
+
+    [field : SerializeField]
     public int MaxLifeBarCount { get; private set; } = 4;
     [field: SerializeField]
     public int Life { get; private set; } = 2;
+    public Action OnResetCallback;
 
     public string PlayerName { get; private set; }
 
     private const string HIGH_SCORE = "HighScore";
+
+    public GameObject Brick;
+
+    public int rows = 5; // ë²½ëŒ í–‰, ì„¸ë¡œ
+
+    public int columns = 14; // ë²½ëŒ ì—´, ê°€ë¡œ
+
+    public float xbrickSpacing = 1.2f; // ê°€ë¡œ ë²½ëŒ ê°„ê²©
+
+    public float ybrickSpacing = 0.5f; // ì„¸ë¡œ ë²½ëŒ ê°„ê²©
 
 
     private void Awake()
@@ -31,6 +42,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Init();
+        MakeBricks();
+    }
+    public void MakeBricks()
+    {
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                float x = j * xbrickSpacing;
+                float y = i * ybrickSpacing;
+                Vector3 brickPosition = new Vector3(x - 7.8f, y + 2.0f, 0);
+
+                GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
+                BrickControl brickControl = brick.GetComponent<BrickControl>();
+
+                if (brickControl != null)
+                {
+                    brickControl.InitializeBrick(brickPosition); // ë²½ëŒì˜ ìœ„ì¹˜ë¥¼ ì „ë‹¬í•˜ì—¬ ì´ˆê¸°í™”
+                }
+            }
+        }
     }
 
     private void Init()
@@ -40,11 +72,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // º®µ¹ ±úÁ³À» ¶§ ¿¬µ¿
+    // ë²½ëŒ ê¹¨ì¡Œì„ ë•Œ ì—°ë™
     public void AddScore(int score)
     {
         Score += score;
-        // ScoreUI ¿¬µ¿
+        // ScoreUI ì—°ë™
         UIManager.Instance.CallScoreChanged(Score);
 
         if (HighScore > score)
@@ -60,7 +92,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(HIGH_SCORE, score);
     }
 
-    // ÇÃ·¹ÀÌ¾î ¹Ù ¶óÀÎ¿¡ °øÀÌ ´êÀ¸¸é »ı¸í °¨¼Ò ¿¬µ¿
+    // í”Œë ˆì´ì–´ ë°” ë¼ì¸ì— ê³µì´ ë‹¿ìœ¼ë©´ ìƒëª… ê°ì†Œ ì—°ë™
     public void DecreaseLife()
     {
         Life--;
@@ -75,7 +107,7 @@ public class GameManager : MonoBehaviour
         Reset();
     }
 
-    // ¸ñ¼û Áõ°¡ ¾ÆÀÌÅÛ ¸Ô¾úÀ» ¶§ ¿¬µ¿
+    // ëª©ìˆ¨ ì¦ê°€ ì•„ì´í…œ ë¨¹ì—ˆì„ ë•Œ ì—°ë™
     public void IncreaseLife()
     {
         if (Life >= MaxLifeBarCount)
@@ -93,7 +125,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.CallNameChanged(name);
     }
 
-    // º®µ¹ÀÌ ´Ù ±úÁ³À» ¶§ ¿¬µ¿
+    // ë²½ëŒì´ ë‹¤ ê¹¨ì¡Œì„ ë•Œ ì—°ë™
     public void GameClear()
     {
         UIManager.Instance.CallGameEnded(true);
@@ -101,13 +133,12 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-        // ´Ù½Ã ¹Ù À§Ä¡·Î °ø ÀÌµ¿°ú °ø Á¤Áö
-        // transform parent ¿Å±â°í transfrom.position ÀûÁ¤ÇÑ À§Ä¡¿¡ ÃÊ±âÈ­
+        OnResetCallback?.Invoke();
     }
 
     private void GameOver()
     {
-        // °ÔÀÓ Á¾·á
+        // ê²Œì„ ì¢…ë£Œ
         UIManager.Instance.CallGameEnded(false);
     }
 }

@@ -407,6 +407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0adf894128ca745b85869781071135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brickPrefab: {fileID: 1972736065049854247, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
+  startPosition: {x: -8, y: 4}
+  brickWidth: 1
+  brickHeight: 0.5
+  rows: 5
+  columns: 10
 --- !u!4 &639718849
 Transform:
   m_ObjectHideFlags: 0
@@ -458,6 +464,51 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655866731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &718160928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 718160930}
+  - component: {fileID: 718160929}
+  m_Layer: 0
+  m_Name: BallCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &718160929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718160928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0545efaa456d7184c84ed4bb7efda94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 1763079687488442588, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+--- !u!4 &718160930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718160928}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -956,12 +1007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b27fa89adaac7f4c8589555c06fa3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxLifeBarCount>k__BackingField: 4
   <Life>k__BackingField: 2
-  Brick: {fileID: 5317770192142502733, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
-  rows: 5
-  columns: 14
-  xbrickSpacing: 1.2
-  ybrickSpacing: 0.5
 --- !u!4 &941221260
 Transform:
   m_ObjectHideFlags: 0
@@ -1121,7 +1168,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1039991260}
   - component: {fileID: 1039991259}
-  - component: {fileID: 1039991258}
   - component: {fileID: 1039991261}
   - component: {fileID: 1039991262}
   m_Layer: 0
@@ -1131,21 +1177,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1039991258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039991257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5696ff94a1c2374c83603a939430262, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paddleSpeed: 5
-  paddle: {fileID: 0}
-  playerPaddle: {fileID: 0}
 --- !u!212 &1039991259
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1270,6 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5696ff94a1c2374c83603a939430262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paddlePrefab: {fileID: 0}
   paddleSpeed: 5
   paddle: {fileID: 1039991257}
   playerPaddle: {fileID: 1039991260}
@@ -2665,3 +2697,4 @@ SceneRoots:
   - {fileID: 1557714498}
   - {fileID: 2114557542}
   - {fileID: 719799869}
+  - {fileID: 718160930}
