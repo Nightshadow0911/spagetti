@@ -49,10 +49,4 @@ public class StartSceneController : MonoBehaviour
         PlayerPrefs.Save(); 
        
     }
-    public void ChangeToNextScene()
-    {
-        //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
-        string nextSceneName = "GameManagerScene";
-        FindObjectOfType<SceneFader>().FadeToScene(nextSceneName);
-    }
 }
