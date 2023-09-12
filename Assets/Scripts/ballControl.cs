@@ -27,9 +27,6 @@ public class BallControl : MonoBehaviour           //랜덤방향
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-
-
         if (transform.position.x < -9 || transform.position.x > 9) //화면 좌우외곽에 부딪혔을때 공이 튕기게
         {
             randomDirection.x *= -1;
@@ -42,8 +39,10 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
         if(transform.position.y < -5) //화면 아래쪽으로 떨어졌을때
         {
-            randomDirection.y *= -1; //임시
-            //공이 아래로 떨어졌을때 공 삭제 및 체력 감소 항목 추가
+
+            Destroy(gameObject); //�� ����
+            GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
+
         }
 
         if (isStopped)
@@ -51,17 +50,22 @@ public class BallControl : MonoBehaviour           //랜덤방향
             Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            isStopped = false;
-
-            if (ballRigidbody != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                ballRigidbody.velocity = randomDirection * moveSpeed;
+                isStopped = false;
+
+                //if (ballRigidbody != null)
+                //{
+                //    ballRigidbody.velocity = randomDirection * moveSpeed;
+                //}
             }
         }
+        else
+        {
+            transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+        }
+
+        
     }
     public void BallSpeedChange()
     {

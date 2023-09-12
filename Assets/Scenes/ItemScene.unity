@@ -154,6 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5696ff94a1c2374c83603a939430262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paddlePrefab: {fileID: 708948186}
+  paddleSpeed: 5
+  paddle: {fileID: 708948186}
   playerPaddle: {fileID: 708948189}
 --- !u!212 &708948188
 SpriteRenderer:
