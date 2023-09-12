@@ -47,6 +47,7 @@ public class SettingsUI : MonoBehaviour
     private void OpenSettings()
     {
         settingsButton.gameObject.SetActive(false);
+        Time.timeScale = 0f;
         settingsObj.SetActive(true);
     }
 }
