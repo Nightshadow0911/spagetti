@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameHelper : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float GetFloat { get; }
     void Start()
     {
         
