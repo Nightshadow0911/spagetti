@@ -11,8 +11,12 @@ public class BallControl : MonoBehaviour           //��������
     private Vector2 randomDirection;
     private bool isStopped;
 
+    private Vector2 _initPos;
+
     void Start()
     {
+        _initPos = transform.position;
+
         ballRigidbody = GetComponent<Rigidbody2D>();
         randomDirection = new Vector2(1, 1).normalized; //�� ó�� ���۹���
         //randomDirection = Random.insideUnitCircle.normalized;
@@ -20,14 +24,13 @@ public class BallControl : MonoBehaviour           //��������
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-        isStopped = true;
+
+        Reset();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-
 
         if (transform.position.x < -9 || transform.position.x > 9) //ȭ�� �¿�ܰ��� �ε������� ���� ƨ���
         {
@@ -41,9 +44,10 @@ public class BallControl : MonoBehaviour           //��������
 
         if(transform.position.y < -5) //ȭ�� �Ʒ������� ����������
         {
+            //Destroy(gameObject); //�� ����
+            GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
+            Reset();
 
-            Destroy(gameObject); //�� ����
-            GameManager.Instance.DecreaseLife();//ü�� ���� ��ũ��Ʈ ���
         }
 
         if (isStopped)
@@ -51,9 +55,22 @@ public class BallControl : MonoBehaviour           //��������
             Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+
+                //if (ballRigidbody != null)
+                //{
+                //    ballRigidbody.velocity = randomDirection * moveSpeed;
+                //}
+            }
+        }
+        else
+        {
+            transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
+        /*if (Input.GetMouseButtonDown(0)) //���콺���� �����̵���
         {
             isStopped = false;
 
@@ -61,8 +78,22 @@ public class BallControl : MonoBehaviour           //��������
             {
                 ballRigidbody.velocity = randomDirection * moveSpeed;
             }
-        }
+        }*/
     }
+
+    private void Reset()
+    {
+        isStopped = true;
+        transform.parent = paddle.transform;
+        transform.position = _initPos;
+    }
+
+    private void Shoot()
+    {
+        isStopped = false;
+        transform.parent = null;
+    }
+
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);
