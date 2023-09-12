@@ -27,24 +27,6 @@ public class BallControl : MonoBehaviour
     {
         transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
 
-
-        if (transform.position.x < -9 || transform.position.x > 9)
-        {
-            randomDirection.x *= -1;
-        }
-
-        if (transform.position.y > 5)
-        {
-            randomDirection.y *= -1;
-        }
-
-        if(transform.position.y < -5)
-        {
-
-            Destroy(gameObject);
-            GameManager.Instance.DecreaseLife();
-        }
-
         if (isStopped)
         {
             Transform paddleTransform = paddle.transform;
@@ -55,17 +37,12 @@ public class BallControl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isStopped = false;
-
-            if (ballRigidbody != null)
-            {
-                ballRigidbody.velocity = randomDirection * moveSpeed;
-            }
         }
     }
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);
-        if (moveSpeed == 5f)
+        if (moveSpeed == 10f)
         {
             moveSpeed += 2f;
         }
@@ -106,6 +83,20 @@ public class BallControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Paddle"))
         {
             randomDirection.y *= -1;
+        }
+
+        if (collision.gameObject.CompareTag("horizontal"))
+        {
+            randomDirection.y *= -1;
+        }
+        if (collision.gameObject.CompareTag("vertical"))
+        {
+            randomDirection.x *= -1;
+        }
+        if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
+        {
+            Destroy(gameObject);
+            GameManager.Instance.DecreaseLife();
         }
     }
 }
