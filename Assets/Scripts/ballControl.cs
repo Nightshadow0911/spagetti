@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
-public class ballControl : MonoBehaviour           //��������
+public class BallControl : MonoBehaviour           //��������
 {
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
