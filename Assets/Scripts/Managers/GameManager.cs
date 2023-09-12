@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             {
                 float x = j * xbrickSpacing;
                 float y = i * ybrickSpacing;
-                Vector3 brickPosition = new Vector3(x - 7.8f, y + 2.0f, 0);
+                Vector3 brickPosition = new Vector3(x - 7.8f, y + 1.0f, 0);
 
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
