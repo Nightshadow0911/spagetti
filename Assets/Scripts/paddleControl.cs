@@ -2,39 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaddleControl : MonoBehaviour //ÆÐµé °ü·Ã
+public class PaddleControl : MonoBehaviour //ï¿½Ðµï¿½ ï¿½ï¿½ï¿½ï¿½
 {
+<<<<<<< HEAD
 
     public float paddleSpeed = 5f; // ÆÐµéÀÇ ÀÌµ¿ ¼Óµµ
     public GameObject paddle; // »ý¼ºµÈ ÆÐµé¿¡ ´ëÇÑ ÂüÁ¶
     public Transform playerPaddle;
+=======
+>>>>>>> 2ba3b7999dee0b9c1a049c0fb481e2e34ce46711
 
-    void Start()
-    {
 
+    
+
+    public GameObject paddlePrefab; // íŒ¨ë“¤ í”„ë¦¬íŒ¹ì— ëŒ€í•œ ì°¸ì¡°
+    public float paddleSpeed = 5f; // íŒ¨ë“¤ì˜ ì´ë™ ì†ë„
+   public GameObject paddle; // ìƒì„±ëœ íŒ¨ë“¤ì— ëŒ€í•œ ì°¸ì¡°
+  public Transform playerPaddle;
+
+
+    void Start(){
+    
     }
 
     void Update()
     {
-        if (paddle != null) // ÆÐµéÀÌ ¾ÆÁ÷ »ý¼ºµÇÁö ¾Ê¾Ò´Ù¸é ¾÷µ¥ÀÌÆ®ÇÏÁö ¾Ê½À´Ï´Ù.
+        if (paddle != null) // íŒ¨ë“¤ì´ ì•„ì§ ìƒì„±ë˜ì§€ ì•Šì•˜ë‹¤ë©´ ì—…ë°ì´íŠ¸í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         {
-            Vector3 currentScale = paddle.transform.localScale; // ÆÐµé °´Ã¼ÀÇ ½ºÄÉÀÏ °¡Á®¿À±â
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 currentScale = playerPaddle.localScale;
+            float paddleHalfLength = currentScale.x / 2f;
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            float x = mousePos.x;
+            // X ì¶• ìœ„ì¹˜ë¥¼ ë§ˆìš°ìŠ¤ í¬ì¸í„°ì˜ X ì¢Œí‘œë¡œ ê³ ì •
+            transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
 
-            float paddleHalfLength = currentScale.x / 2f; // ÆÐµéÀÇ ±æÀÌ°¡ º¯ÇØµµ È­¸é ¹ÛÀ¸·Î ³ª°¡Áö ¾ÊÀ½
-            if (x + paddleHalfLength > 8.9f)
-            {
-                x = 8.9f - paddleHalfLength;
-            }
-            if (x - paddleHalfLength < -8.9f)
-            {
-                x = -8.9f + paddleHalfLength;
-            }
+            // í™”ë©´ ê²½ê³„ ë‚´ì— ê³ ì •
+            float screenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+            float clampX = Mathf.Clamp(transform.position.x, -screenWidth + paddleHalfLength, screenWidth - paddleHalfLength);
 
-            // ÆÐµé °´Ã¼ÀÇ À§Ä¡¸¦ ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
-            paddle.transform.position = new Vector3(x, paddle.transform.position.y, 0);
+            transform.position = new Vector3(clampX, transform.position.y, transform.position.z);
         }
     }
     public void ChangeScale()

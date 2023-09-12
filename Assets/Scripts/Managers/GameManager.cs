@@ -62,12 +62,12 @@ public class GameManager : MonoBehaviour
 
     private void Init()
     {
-        if (PlayerPrefs.HasKey(HIGH_SCORE))
-        {
-            SetHighScore(PlayerPrefs.GetInt(HIGH_SCORE));
-        }
+        SetPlayerName();
+
     }
 
+
+    // 벽돌 깨졌을 때 연동
     public void AddScore(int score)
     {
         Score += score;
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (HighScore > score)
         {
             SetHighScore(Score);
+            UIManager.Instance.CallHighScoreChanged(Score);
         }
     }
 
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(HIGH_SCORE, score);
     }
 
-    // 플레이어 바 라인에 공이 닿으면 생명 감소
+    // 플레이어 바 라인에 공이 닿으면 생명 감소 연동
     public void DecreaseLife()
     {
         Life--;
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
         Reset();
     }
 
-    // 목숨 증가 아이템 먹었을 때
+    // 목숨 증가 아이템 먹었을 때 연동
     public void IncreaseLife()
     {
         if (Life >= MaxLifeBarCount)
@@ -113,12 +114,13 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.CallLifeChanged(true);
     }
     
-    public void SetPlayerName(string name)
+    public void SetPlayerName()
     {
-        PlayerName = name;
+        PlayerName = PlayerPrefs.GetString("PlayerName");
         UIManager.Instance.CallNameChanged(name);
     }
 
+    // 벽돌이 다 깨졌을 때 연동
     public void GameClear()
     {
         UIManager.Instance.CallGameEnded(true);

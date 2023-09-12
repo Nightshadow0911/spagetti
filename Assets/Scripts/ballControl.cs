@@ -94,22 +94,11 @@ public class ballControl : MonoBehaviour           //랜덤방향
         if (collision.gameObject.CompareTag("Brick")) //벽돌과 충돌했을때 벽돌을 파괴하고 공이 튕겨나가도록
         {
             Destroy(collision.gameObject);
-            // 벽돌의 중심과 충돌 지점을 연결한 벡터
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
-
-            // 법선 벡터 (벽돌 표면의 방향)
             Vector2 normalVector = collision.contacts[0].normal;
-
-            // 입사각 계산
             float incidenceAngle = Vector2.Angle(randomDirection, -collisionVector);
-
-            // 반사 각도 계산 (정반사)
             float reflectionAngle = 2 * incidenceAngle;
-
-            // 반사 방향 벡터 계산
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
-
-            // 새로운 방향으로 공의 이동 방향 설정
             randomDirection = reflectionDirection.normalized;
         }
 

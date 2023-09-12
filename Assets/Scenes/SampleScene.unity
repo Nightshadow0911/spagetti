@@ -539,7 +539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRigidbody: {fileID: 1717051616}
+<<<<<<< HEAD
   paddle: {fileID: 0}
+=======
+  paddle: {fileID: 1039991257}
+>>>>>>> 2ba3b7999dee0b9c1a049c0fb481e2e34ce46711
   moveSpeed: 5
 --- !u!1 &1841336858
 GameObject:
