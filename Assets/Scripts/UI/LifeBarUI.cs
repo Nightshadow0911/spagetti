@@ -39,7 +39,8 @@ public class LifeBarUI : MonoBehaviour
         }
         else
         {
-            lifeBars[GameManager.Instance.Life - 1].SetActive(false);
+            // 라이프가 깎인 후 SetActive이므로 그냥 Life를 불러옴
+            lifeBars[GameManager.Instance.Life].SetActive(false);
         }
     }
 }
