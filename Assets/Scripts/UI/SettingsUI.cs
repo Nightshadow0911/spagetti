@@ -41,12 +41,14 @@ public class SettingsUI : MonoBehaviour
     private void CloseSettings()
     {
         settingsButton.gameObject.SetActive(true);
+        Time.timeScale = 1f;
         settingsObj.SetActive(false);
     }
 
     private void OpenSettings()
     {
         settingsButton.gameObject.SetActive(false);
+        Time.timeScale = 0f;
         settingsObj.SetActive(true);
     }
 }

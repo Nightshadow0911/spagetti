@@ -6,7 +6,6 @@ public class ToCredit : MonoBehaviour
 {
    public void toCredit()
     {
-        string nextSceneName = "CreditScene";
-        FindObjectOfType<SceneFader>().FadeToScene(nextSceneName);
+        SceneFader.Instance.FadeToScene((int)SceneType.CreditScene);
     }
 }

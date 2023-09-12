@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartSceneController : MonoBehaviour
 {
     public GameObject nameInputUI;
-    public InputField nameInputField; 
+    public TMP_InputField nameInputField;
     public Button nameButton; 
     public Button startButton; 
     public GameObject difficultyPanel; 
@@ -48,11 +49,5 @@ public class StartSceneController : MonoBehaviour
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.Save(); 
        
-    }
-    public void ChangeToNextScene()
-    {
-        //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
-        string nextSceneName = "GameManagerScene";
-        FindObjectOfType<SceneFader>().FadeToScene(nextSceneName);
     }
 }

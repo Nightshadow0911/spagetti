@@ -42,15 +42,17 @@ public class SoundManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
     {
         Init();
-        PlayBGM(BGM.InGame);
     }
 
     private void Init()
