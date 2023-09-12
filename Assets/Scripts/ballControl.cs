@@ -31,7 +31,9 @@ public class BallControl : MonoBehaviour
     void Update()
     {
 
+
         transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+
 
         if (isStopped)
         {
@@ -52,7 +54,6 @@ public class BallControl : MonoBehaviour
         {
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
-
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartSceneController : MonoBehaviour
 {
     public GameObject nameInputUI;
-    public InputField nameInputField; 
+    public TMP_InputField nameInputField;
     public Button nameButton; 
     public Button startButton; 
     public GameObject difficultyPanel; 
