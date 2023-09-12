@@ -9,11 +9,14 @@ public class BallControl : MonoBehaviour           //랜덤방향
     public float moveSpeed = 5f;
     private Vector2 randomDirection;
     private bool isStopped;
+    private bool isMagnetic=false;
+    private Transform paddleTransform;
+    public float magneticRadius = 0.6f;
 
     void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-
+        paddleTransform = paddle.transform;
         randomDirection = new Vector2(1, 1).normalized; //공 처음 시작방향
         //randomDirection = Random.insideUnitCircle.normalized;
 
@@ -47,25 +50,31 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
         if (isStopped)
         {
-            Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
             if (Input.GetMouseButtonDown(0))
             {
                 isStopped = false;
-
-                //if (ballRigidbody != null)
-                //{
-                //    ballRigidbody.velocity = randomDirection * moveSpeed;
-                //}
             }
         }
         else
         {
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
+        if (isMagnetic)
+        {
+            // 공과 패들 사이의 거리 계산
+            float distance = Vector2.Distance(transform.position, paddleTransform.position);
 
-        
+            if (distance <= magneticRadius)
+            {
+                 // 자석 효과 종료
+                ballRigidbody.velocity = Vector2.zero;
+                isStopped = true;
+                isMagnetic = false;
+            }
+        }
+
     }
     public void BallSpeedChange()
     {
@@ -88,7 +97,7 @@ public class BallControl : MonoBehaviour           //랜덤방향
     }
     public void MagneticBall()
     {
-
+        isMagnetic = true;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

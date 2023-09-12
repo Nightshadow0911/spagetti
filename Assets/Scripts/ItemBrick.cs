@@ -13,7 +13,7 @@ public class ItemBrick : MonoBehaviour
         BallSpeedChange,
         AddBall,
         //BallPowerUp,
-        //MagenticBall
+        MagenticBall
     }
     public float sizeChance = 0.2f;
     public float speedChance = 0.4f;
@@ -32,7 +32,7 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.BallSpeedChange;
         }
-        else //(randomValue < addBallChance)
+        else if(randomValue < addBallChance)
         {
             return BrickItemEffect.AddBall;
         }
@@ -40,10 +40,10 @@ public class ItemBrick : MonoBehaviour
         //{
         //    return BrickItemEffect.BallPowerUp;
         //}
-        //else
-        //{
-        //    return BrickItemEffect.MagenticBall;
-        //}
+        else
+        {
+            return BrickItemEffect.MagenticBall;
+        }
     }
     private void ApplyItemEffect(BrickItemEffect effect)
     {
@@ -60,10 +60,10 @@ public class ItemBrick : MonoBehaviour
                 break;
             //case BrickItemEffect.BallPowerUp:
 
-                //break;
-            //case BrickItemEffect.MagenticBall:
-
-            //    break;
+            //break;
+            case BrickItemEffect.MagenticBall:
+                ball.GetComponent<BallControl>().MagneticBall();
+                break;
 
         }
     }
