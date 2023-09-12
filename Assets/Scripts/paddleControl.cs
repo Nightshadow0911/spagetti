@@ -5,6 +5,7 @@ using UnityEngine;
 public class PaddleControl : MonoBehaviour //�е� ����
 {
 
+
     
 
     public GameObject paddlePrefab; // 패들 프리팹에 대한 참조
@@ -13,11 +14,9 @@ public class PaddleControl : MonoBehaviour //�е� ����
   public Transform playerPaddle;
 
 
-    //void Start()
-    //{
-    //    // 패들을 생성하고 초기 위치에 배치합니다.
-    //    paddle = Instantiate(paddlePrefab, transform.position, Quaternion.identity);
-    //}
+    void Start(){
+    
+    }
 
     void Update()
     {
