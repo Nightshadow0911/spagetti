@@ -47,7 +47,7 @@ public class SceneFader : MonoBehaviour
     {
         //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        FindObjectOfType<SceneFader>().FadeToScene(nextSceneIndex);
+        FadeToScene(nextSceneIndex);
     }
 
     IEnumerator FadeIn()
@@ -55,7 +55,7 @@ public class SceneFader : MonoBehaviour
         float alpha = 1.0f;
         while (alpha > 0)
         {
-            alpha -= Time.deltaTime * fadeSpeed;
+            alpha -= Time.unscaledDeltaTime * fadeSpeed;
             fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
@@ -73,19 +73,14 @@ public class SceneFader : MonoBehaviour
         float alpha = 0.0f;
         while (alpha < 1)
         {
-            alpha += Time.deltaTime * fadeSpeed;
+            alpha += Time.unscaledDeltaTime * fadeSpeed;
             fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
 
-        var async = SceneManager.LoadSceneAsync(sceneIndex);
+        SceneManager.LoadScene(sceneIndex);
 
-        while (!async.isDone)
-        {
-            yield return null;
-        }
-
-        OnLoadSceneByIndex(sceneIndex);
+        StartCoroutine(FadeIn());
     }
 
     private void OnLoadSceneByIndex(int sceneIndex)
