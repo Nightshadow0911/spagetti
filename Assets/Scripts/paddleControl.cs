@@ -25,7 +25,6 @@ public class PaddleControl : MonoBehaviour
 
             transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
 
-            // ?�면 경계 ?�에 고정
             float screenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
             float clampX = Mathf.Clamp(transform.position.x, -screenWidth + paddleHalfLength, screenWidth - paddleHalfLength);
 
