@@ -6,6 +6,5 @@ public class BrickControl : MonoBehaviour
     public void InitializeBrick(Vector3 position)
     {
         transform.position = position;
-        transform.localScale = new Vector3(1.0f, 0.3f, 1.0f); // 벽돌의 고정된 크기
     }
 }

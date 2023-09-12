@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     public float ybrickSpacing = 0.5f; // 세로 벽돌 간격
 
+    public GameObject EdgeLine;
+
 
     private void Awake()
     {
@@ -43,16 +45,18 @@ public class GameManager : MonoBehaviour
     {
         Init();
         MakeBricks();
+        MakeEdge();
     }
     public void MakeBricks()
     {
+        
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < columns; j++)
             {
                 float x = j * xbrickSpacing;
                 float y = i * ybrickSpacing;
-                Vector3 brickPosition = new Vector3(x - 7.8f, y + 2.0f, 0);
+                Vector3 brickPosition = new Vector3(x - 7.8f, y + 1.0f, 0);
 
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
@@ -63,6 +67,13 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MakeEdge()
+    {
+        Vector3 EdgePosition = new Vector3(0f, 5f, 0f);
+
+        GameObject brick = Instantiate(EdgeLine, transform.position + EdgePosition, Quaternion.identity);
     }
 
     private void Init()

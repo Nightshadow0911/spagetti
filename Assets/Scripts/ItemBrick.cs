@@ -53,7 +53,7 @@ public class ItemBrick : MonoBehaviour
                 playerPaddle.GetComponent<PaddleControl>().ChangeScale();
                 break;
             case BrickItemEffect.BallSpeedChange:
-                ball.GetComponent<ballControl>().BallSpeedChange();
+                ball.GetComponent<BallControl>().BallSpeedChange();
                 break;
             case BrickItemEffect.AddBall:
                 GameObject newObject = Instantiate(ball, transform.position, Quaternion.identity);
