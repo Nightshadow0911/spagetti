@@ -378,7 +378,7 @@ MonoBehaviour:
   paddlePrefab: {fileID: 0}
   paddleSpeed: 5
   paddle: {fileID: 1039991257}
-  playerPaddle: {fileID: 0}
+  playerPaddle: {fileID: 1039991260}
 --- !u!1 &1717051611
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,8 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be3b5e22c548304fa395f4e0e85c22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballRigidbody: {fileID: 0}
-  paddle: {fileID: 0}
+  ballRigidbody: {fileID: 1717051616}
+  paddle: {fileID: 1039991257}
   moveSpeed: 5
 --- !u!1 &1841336858
 GameObject:
