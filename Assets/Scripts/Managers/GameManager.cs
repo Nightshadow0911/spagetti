@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
     public int HighScore { get; private set; }
 
-    [fiel
-        : SerializeField]
+    [field : SerializeField]
     public int MaxLifeBarCount { get; private set; } = 4;
     [field: SerializeField]
     public int Life { get; private set; } = 2;
+    public Action OnResetCallback;
 
     public string PlayerName { get; private set; }
 
@@ -101,8 +101,7 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-        // 다시 바 위치로 공 이동과 공 정지
-        // transform parent 옮기고 transfrom.position 적정한 위치에 초기화
+        OnResetCallback?.Invoke();
     }
 
     private void GameOver()

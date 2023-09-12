@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class BallControl : MonoBehaviour           //랜덤방향
 {
@@ -39,8 +40,7 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
         if(transform.position.y < -5) //화면 아래쪽으로 떨어졌을때
         {
-
-            Destroy(gameObject); //�� ����
+            //Destroy(gameObject); //�� ����
             GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
 
         }
