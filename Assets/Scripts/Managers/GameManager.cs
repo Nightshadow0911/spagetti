@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
     public int HighScore { get; private set; }
 
-    [field: SerializeField]
+    [fiel
+        : SerializeField]
     public int MaxLifeBarCount { get; private set; } = 4;
     [field: SerializeField]
     public int Life { get; private set; } = 2;

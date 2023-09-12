@@ -42,8 +42,10 @@ public class BallControl : MonoBehaviour           //랜덤방향
 
         if(transform.position.y < -5) //화면 아래쪽으로 떨어졌을때
         {
-            randomDirection.y *= -1; //임시
-            //공이 아래로 떨어졌을때 공 삭제 및 체력 감소 항목 추가
+
+            Destroy(gameObject); //�� ����
+            GameManager.Instance.DecreaseLife();//ü�� ���� �׸� �߰�
+
         }
 
         if (isStopped)

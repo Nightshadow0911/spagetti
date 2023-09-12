@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - brickPrefab: {fileID: 1972736065049854247, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
+  - brickPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
