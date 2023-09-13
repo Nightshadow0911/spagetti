@@ -54,6 +54,9 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < rows; i++)
         {
+            // Start, Credit 씬 제외
+            int sceneLength = Enum.GetValues(typeof(SceneType)).Length - 2;
+
             for (int j = 0; j < columns; j++)
             {
                 float x = j * xbrickSpacing;
@@ -63,12 +66,19 @@ public class GameManager : MonoBehaviour
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
 
-                _brickList.Add(brickControl);
+                // Stage1의 Index가 1부터 시작한다는 가정 하에 만듬
+                SceneType type = SceneFader.Instance.GetCurrentSceneType();
+
+                int ranNum = UnityEngine.Random.Range(0, (int)type);
+
+                ranNum = Math.Clamp(ranNum, 0, sceneLength);
 
                 if (brickControl != null)
                 {
-                    brickControl.InitializeBrick(brickPosition); // 벽돌의 위치를 전달하여 초기화
+                    brickControl.InitializeBrick(brickPosition, ranNum + 1); // 벽돌의 위치를 전달하여 초기화
                 }
+
+                _brickList.Add(brickControl);
             }
         }
     }
