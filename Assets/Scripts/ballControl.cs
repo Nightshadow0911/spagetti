@@ -16,6 +16,9 @@ public class BallControl : MonoBehaviour
     private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
+    private bool isPoweredUp = false;
+    private float powerUpDuration = 10.0f;
+    public int ballPower = 1;
 
     private Vector2 _initPos;
 
@@ -109,6 +112,24 @@ public class BallControl : MonoBehaviour
     {
         isMagnetic = true;
     }
+    public void BallPowerUp()
+    {   
+        if (!isPoweredUp)
+        {
+            isPoweredUp = true;
+            ballPower = 10;
+            StartCoroutine(EndPowerUp());          
+        }
+    }
+    private IEnumerator EndPowerUp()
+    {
+        // 일정 시간 후 강화 종료
+        yield return new WaitForSeconds(powerUpDuration);
+
+        // 강화 종료
+        ballPower = 1;
+        isPoweredUp = false;
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
@@ -118,8 +139,8 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
 
+            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
 
@@ -143,9 +164,9 @@ public class BallControl : MonoBehaviour
             randomDirection = reflectionDirection.normalized;
 
 
+
             SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
-            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))

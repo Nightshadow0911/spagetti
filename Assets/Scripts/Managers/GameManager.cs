@@ -57,6 +57,9 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < rows; i++)
         {
+            // Start, Credit 씬 제외
+            int sceneLength = Enum.GetValues(typeof(SceneType)).Length - 2;
+
             for (int j = 0; j < columns; j++)
             {
                 float x = j * xbrickSpacing;
@@ -65,13 +68,21 @@ public class GameManager : MonoBehaviour
 
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
+                brickControl.ball = Ball;
 
-                _brickList.Add(brickControl);
+                // Stage1의 Index가 1부터 시작한다는 가정 하에 만듬
+                SceneType type = SceneFader.Instance.GetCurrentSceneType();
+
+                int ranNum = UnityEngine.Random.Range(0, (int)type);
+
+                ranNum = Math.Clamp(ranNum, 0, sceneLength);
 
                 if (brickControl != null)
                 {
-                    brickControl.InitializeBrick(brickPosition); // 벽돌의 위치를 전달하여 초기화
+                    brickControl.InitializeBrick(brickPosition, ranNum + 1); // 벽돌의 위치를 전달하여 초기화
                 }
+
+                _brickList.Add(brickControl);
             }
         }
     }
@@ -88,8 +99,8 @@ public class GameManager : MonoBehaviour
         Vector3 BallPosition = new Vector3(0f, -3f, 0f);
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
         GameObject paddle = Instantiate(Paddle, transform.position + PaddlePosition, Quaternion.identity);
-        GameObject ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
-        ball.GetComponent<BallControl>().paddle = paddle;
+        Ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
+        Ball.GetComponent<BallControl>().paddle = paddle;
 
     }
 
@@ -103,7 +114,6 @@ public class GameManager : MonoBehaviour
         if (HighScore < Score)
         {
             SetHighScore(Score);
-            UIManager.Instance.CallHighScoreChanged(Score);
         }
 
         if (_brickList.Count == 0) 
@@ -173,23 +183,32 @@ public class GameManager : MonoBehaviour
     private void SetHighScore(int score)
     {
         HighScore = score;
+        SetHighScoreUI();
     }
 
     private void SetHighScoreToPlyaerPrefs()
     {
-        PlayerPrefs.SetInt(HIGH_SCORE, HighScore);
+        if (HighScore > PlayerPrefs.GetInt(HIGH_SCORE))
+        {
+            PlayerPrefs.SetInt(HIGH_SCORE, HighScore);
+        }
     }
 
     private void SetHighScoreUI()
     {
-        int highScore = PlayerPrefs.GetInt(HIGH_SCORE);
-        UIManager.Instance.CallHighScoreChanged(highScore);
+        UIManager.Instance.CallHighScoreChanged(HighScore);
+    }
+
+    private void InitHighScore()
+    {
+        HighScore = PlayerPrefs.GetInt(HIGH_SCORE);
+        SetHighScoreUI();
     }
 
     private void Init()
     {
         SetPlayerName();
-        SetHighScoreUI();
+        InitHighScore();
         Time.timeScale = 1.0f;
     }
 

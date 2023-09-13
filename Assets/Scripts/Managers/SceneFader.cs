@@ -7,6 +7,8 @@ public enum SceneType
 {
     StartScene,
     Stage1,
+    Stage2,
+    Stage3,
     CreditScene,
 }
 
@@ -43,6 +45,11 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(FadeOut(sceneIndex));
     }
 
+    public SceneType GetCurrentSceneType()
+    {
+        return (SceneType)SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void ChangeToNextScene()
     {
         //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
@@ -61,6 +68,7 @@ public class SceneFader : MonoBehaviour
         }
 
         OnLoadSceneByIndex(SceneManager.GetActiveScene().buildIndex);
+        isFadingOut = false;
     }
 
     IEnumerator FadeOut(int sceneIndex)
