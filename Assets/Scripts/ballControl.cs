@@ -16,7 +16,7 @@ public class BallControl : MonoBehaviour
     private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
-    private bool isPoweredUp = false;
+    private bool isPowereUp = false;
     private float powerUpDuration = 10.0f;
     public int ballPower = 1;
 
@@ -33,7 +33,7 @@ public class BallControl : MonoBehaviour
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-        
+        moveSpeed = 5f;
         Reset();
 
     }
@@ -56,22 +56,12 @@ public class BallControl : MonoBehaviour
         {
             moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-            
-
         }
 
         if (isMagnetic)
         {
-            // 공과 패들 사이의 거리 계산
-            float distance = Vector2.Distance(transform.position, paddleTransform.position);
-
-            if (distance <= magneticRadius)
-            {
-                 // 자석 효과 종료
-                ballRigidbody.velocity = Vector2.zero;
-                isStopped = true;
-                isMagnetic = false;
-            }
+            Reset();
+            isMagnetic = false;
         }
     }
 
@@ -92,7 +82,7 @@ public class BallControl : MonoBehaviour
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);
-        if (moveSpeed == 10f)
+        if (moveSpeed <= 5f)
         {
             moveSpeed += 2f;
         }
@@ -112,24 +102,24 @@ public class BallControl : MonoBehaviour
     {
         isMagnetic = true;
     }
-    public void BallPowerUp()
-    {   
-        if (!isPoweredUp)
-        {
-            isPoweredUp = true;
-            ballPower = 10;
-            StartCoroutine(EndPowerUp());          
-        }
-    }
-    private IEnumerator EndPowerUp()
-    {
-        // 일정 시간 후 강화 종료
-        yield return new WaitForSeconds(powerUpDuration);
+    //public void BallPowerUp()
+    //{   
+    //    if (!isPoweredUp)
+    //    {
+    //        isPoweredUp = true;
+    //        ballPower = 2;
+    //        StartCoroutine(EndPowerUp());          
+    //    }
+    //}
+    //private IEnumerator EndPowerUp()
+    //{
+    //    // 일정 시간 후 강화 종료
+    //    yield return new WaitForSeconds(powerUpDuration);
 
-        // 강화 종료
-        ballPower = 1;
-        isPoweredUp = false;
-    }
+    //    // 강화 종료
+    //    ballPower = 1;
+    //    isPowereUp = false;
+    //}
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
@@ -139,9 +129,8 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-
-            Destroy(collision.gameObject);
-            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
+            BrickControl brickControl = collision.collider.GetComponent<BrickControl>();
+            GameManager.Instance.RemoveBrickFromList(brickControl);
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
 
@@ -164,8 +153,7 @@ public class BallControl : MonoBehaviour
             // 공의 방향을 반사 방향으로 설정하여 공이 벽돌에서 튕겨 나가도록 합니다.
             randomDirection = reflectionDirection.normalized;
 
-
-
+            brickControl.DecreaseLife(this);
             SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
         }

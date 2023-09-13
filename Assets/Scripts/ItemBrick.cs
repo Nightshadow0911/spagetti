@@ -37,10 +37,10 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.AddBall;
         }
-        else if (randomValue < ballPowerUpChance)
-        {
-            return BrickItemEffect.BallPowerUp;
-        }
+        //else if (randomValue < ballPowerUpChance)
+        //{
+        //    return BrickItemEffect.BallPowerUp;
+        //}
         else if(randomValue < MagenticBallChance)
         {
             return BrickItemEffect.MagenticBall;
@@ -61,11 +61,13 @@ public class ItemBrick : MonoBehaviour
                 ball.GetComponent<BallControl>().BallSpeedChange();
                 break;
             case BrickItemEffect.AddBall:
-                GameObject newObject = Instantiate(ball, transform.position, Quaternion.identity);
+                Vector3 BallPosition = new Vector3 (0f, -3f, 0f);
+                GameObject Ball = Instantiate(ball, BallPosition, Quaternion.identity);
+                Ball.GetComponent<BallControl>().paddle = GameManager.Instance.Paddle;
                 break;
-            case BrickItemEffect.BallPowerUp:
-                ball.GetComponent<BallControl>().BallPowerUp();
-                break;
+            //case BrickItemEffect.BallPowerUp:
+            //    ball.GetComponent<BallControl>().BallPowerUp();
+            //    break;
             case BrickItemEffect.MagenticBall:
                 ball.GetComponent<BallControl>().MagneticBall();
                 break;
@@ -76,7 +78,11 @@ public class ItemBrick : MonoBehaviour
     }
     private void OnDestroy()
     {
-        BrickItemEffect selectedEffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
-        ApplyItemEffect(selectedEffect); // 선택된 효과를 적용
+        float random = Random.Range(0f, 1f);
+        if (random < 0.2f)
+        {
+            BrickItemEffect selectedEffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
+            ApplyItemEffect(selectedEffect); // 선택된 효과를 적용
+        }      
     }
 }
