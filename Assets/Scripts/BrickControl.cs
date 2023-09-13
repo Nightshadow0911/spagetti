@@ -85,6 +85,7 @@ public class BrickControl : MonoBehaviour
     private void SetLife(int life)
     {
         Life = life;
+        SetColor();
     }
 
 

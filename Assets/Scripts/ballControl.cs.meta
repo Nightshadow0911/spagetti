@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - ballRigidbody: {fileID: 1520979589313857147, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+  - brickRigidbody: {fileID: -6419046655552854842, guid: 8fa0210093780db4884cfbd65a9cfccb, type: 3}
   - paddle: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
