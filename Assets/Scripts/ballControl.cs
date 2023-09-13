@@ -14,7 +14,7 @@ public class BallControl : MonoBehaviour
     private bool isStopped;
     private bool isMagnetic=false;
     private Transform paddleTransform;
-    public float magneticRadius = 0.6f;
+    public float magneticRadius = 1.5f;
 
     private Vector2 _initPos;
 
@@ -29,8 +29,9 @@ public class BallControl : MonoBehaviour
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-
+        
         Reset();
+
     }
 
     // Update is called once per frame
