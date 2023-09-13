@@ -61,7 +61,8 @@ public class ItemBrick : MonoBehaviour
                 ball.GetComponent<BallControl>().BallSpeedChange();
                 break;
             case BrickItemEffect.AddBall:
-                GameObject newObject = Instantiate(ball, transform.position, Quaternion.identity);
+                Vector3 BallPosition = new Vector3 (0f, -3f, 0f);
+                GameObject Ball = Instantiate(ball, BallPosition, Quaternion.identity);
                 break;
             case BrickItemEffect.BallPowerUp:
                 ball.GetComponent<BallControl>().BallPowerUp();

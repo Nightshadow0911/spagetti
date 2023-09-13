@@ -54,7 +54,6 @@ public class BallControl : MonoBehaviour
         }
         else
         {
-            moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
@@ -90,7 +89,7 @@ public class BallControl : MonoBehaviour
     public void BallSpeedChange()
     {
         float randomValue = Random.Range(0f, 1f);
-        if (moveSpeed == 10f)
+        if (moveSpeed <= 5f)
         {
             moveSpeed += 2f;
         }

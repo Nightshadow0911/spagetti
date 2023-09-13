@@ -6,6 +6,7 @@ MonoImporter:
   defaultReferences:
   - playerPaddle: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
   - ball: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+  - Paddle: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
