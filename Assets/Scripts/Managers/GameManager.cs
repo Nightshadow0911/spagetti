@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
         if (HighScore < Score)
         {
             SetHighScore(Score);
-            UIManager.Instance.CallHighScoreChanged(Score);
         }
 
         if (_brickList.Count == 0) 
@@ -172,6 +171,7 @@ public class GameManager : MonoBehaviour
     private void SetHighScore(int score)
     {
         HighScore = score;
+        SetHighScoreUI();
     }
 
     private void SetHighScoreToPlyaerPrefs()
@@ -184,14 +184,19 @@ public class GameManager : MonoBehaviour
 
     private void SetHighScoreUI()
     {
-        int highScore = PlayerPrefs.GetInt(HIGH_SCORE);
-        UIManager.Instance.CallHighScoreChanged(highScore);
+        UIManager.Instance.CallHighScoreChanged(HighScore);
+    }
+
+    private void InitHighScore()
+    {
+        HighScore = PlayerPrefs.GetInt(HIGH_SCORE);
+        SetHighScoreUI();
     }
 
     private void Init()
     {
         SetPlayerName();
-        SetHighScoreUI();
+        InitHighScore();
         Time.timeScale = 1.0f;
     }
 
