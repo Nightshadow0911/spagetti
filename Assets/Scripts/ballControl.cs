@@ -45,6 +45,7 @@ public class BallControl : MonoBehaviour
         {
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
+
             if (Input.GetMouseButtonDown(0))
             {
                 isStopped = false;
@@ -70,8 +71,6 @@ public class BallControl : MonoBehaviour
                 isMagnetic = false;
             }
         }
-
-
     }
 
     private void Reset()
