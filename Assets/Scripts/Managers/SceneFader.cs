@@ -66,6 +66,7 @@ public class SceneFader : MonoBehaviour
         }
 
         OnLoadSceneByIndex(SceneManager.GetActiveScene().buildIndex);
+        isFadingOut = false;
     }
 
     IEnumerator FadeOut(int sceneIndex)

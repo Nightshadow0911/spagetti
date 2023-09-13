@@ -176,7 +176,10 @@ public class GameManager : MonoBehaviour
 
     private void SetHighScoreToPlyaerPrefs()
     {
-        PlayerPrefs.SetInt(HIGH_SCORE, HighScore);
+        if (HighScore > PlayerPrefs.GetInt(HIGH_SCORE))
+        {
+            PlayerPrefs.SetInt(HIGH_SCORE, HighScore);
+        }
     }
 
     private void SetHighScoreUI()
