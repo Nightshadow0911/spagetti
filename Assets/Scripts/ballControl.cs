@@ -10,6 +10,7 @@ public class BallControl : MonoBehaviour
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
     public float moveSpeed = 5f;
+    public float accelerationRate = 0.2f;
     private Vector2 randomDirection;
     private bool isStopped;
     private bool isMagnetic=false;
@@ -49,6 +50,7 @@ public class BallControl : MonoBehaviour
         }
         else
         {
+            moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
