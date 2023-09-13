@@ -128,8 +128,10 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-            Destroy(collision.gameObject);
-            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
+
+            BrickControl brickControl = collision.collider.GetComponent<BrickControl>();
+            GameManager.Instance.RemoveBrickFromList(brickControl);
+
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
 
@@ -152,8 +154,7 @@ public class BallControl : MonoBehaviour
             // 공의 방향을 반사 방향으로 설정하여 공이 벽돌에서 튕겨 나가도록 합니다.
             randomDirection = reflectionDirection.normalized;
 
-
-
+            brickControl.DecreaseLife(this);
             SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
         }

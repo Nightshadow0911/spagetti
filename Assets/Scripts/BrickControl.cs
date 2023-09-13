@@ -29,7 +29,7 @@ public class BrickControl : MonoBehaviour
         SetLife(life);
     }
 
-    public void DecreaseLife()
+    public void DecreaseLife(BallControl ball)
     {
         Life --;
         if (Life <= 0)
