@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public float ybrickSpacing = 0.5f; // 세로 벽돌 간격
 
     public GameObject EdgeLine;
-
     public GameObject Ball;
     public GameObject Paddle;
 
@@ -105,9 +104,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
-
-
     // 벽돌 깨졌을 때 연동
     public void AddScore(int score)
     {
@@ -132,6 +128,7 @@ public class GameManager : MonoBehaviour
     public void DecreaseLife()
     {
         Life--;
+
 
         UIManager.Instance.CallLifeChanged(false);
 
@@ -159,8 +156,6 @@ public class GameManager : MonoBehaviour
         PlayerName = PlayerPrefs.GetString("PlayerName");
         UIManager.Instance.CallNameChanged(PlayerName);
     }
-
-    // 벽돌이 다 깨졌을 때 연동
 
     public void RemoveBrickFromList(BrickControl brick)
     {
@@ -215,8 +210,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    // 에디터용
+#if UNITY_EDITOR
     public void Clear()
     {
         GameClear();
     }
+
+    public void Over()
+    {
+        GameOver();
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+    }
+#endif
 }
