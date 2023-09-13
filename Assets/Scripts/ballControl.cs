@@ -10,8 +10,12 @@ public class BallControl : MonoBehaviour
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
     public float moveSpeed = 5f;
+    public float accelerationRate = 0.2f;
     private Vector2 randomDirection;
     private bool isStopped;
+    private bool isMagnetic=false;
+    private Transform paddleTransform;
+    public float magneticRadius = 1.5f;
 
     private Vector2 _initPos;
 
@@ -20,13 +24,15 @@ public class BallControl : MonoBehaviour
         _initPos = transform.position;
 
         ballRigidbody = GetComponent<Rigidbody2D>();
+        paddleTransform = paddle.transform;
         randomDirection = new Vector2(1, 1).normalized;
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-
+        
         Reset();
+
     }
 
     // Update is called once per frame
@@ -34,23 +40,35 @@ public class BallControl : MonoBehaviour
     {
         if (isStopped)
         {
-            Transform paddleTransform = paddle.transform;
             float paddleXPosition = paddleTransform.position.x;
             transform.position = new Vector3(paddleXPosition, transform.position.y, 0);
             if (Input.GetMouseButtonDown(0))
             {
+                isStopped = false;
                 Shoot();
-
-                //if (ballRigidbody != null)
-                //{
-                //    ballRigidbody.velocity = randomDirection * moveSpeed;
-                //}
             }
         }
         else
         {
+            moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
+
+        if (isMagnetic)
+        {
+            // 공과 패들 사이의 거리 계산
+            float distance = Vector2.Distance(transform.position, paddleTransform.position);
+
+            if (distance <= magneticRadius)
+            {
+                 // 자석 효과 종료
+                ballRigidbody.velocity = Vector2.zero;
+                isStopped = true;
+                isMagnetic = false;
+            }
+        }
+
+
     }
 
     private void Reset()
@@ -58,6 +76,7 @@ public class BallControl : MonoBehaviour
         isStopped = true;
         transform.parent = paddle.transform;
         transform.position = _initPos;
+
     }
 
     private void Shoot()
@@ -87,7 +106,7 @@ public class BallControl : MonoBehaviour
     }
     public void MagneticBall()
     {
-
+        isMagnetic = true;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
