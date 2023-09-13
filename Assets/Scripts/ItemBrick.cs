@@ -12,13 +12,13 @@ public class ItemBrick : MonoBehaviour
         PaddleSizeChange,
         BallSpeedChange,
         AddBall,
-        //BallPowerUp,
+        BallPowerUp,
         MagenticBall
     }
     public float sizeChance = 0.2f;
     public float speedChance = 0.4f;
     public float addBallChance = 0.6f;
-    //public float ballPowerUpChance = 0.8f;
+    public float ballPowerUpChance = 0.8f;
     //public float MagenticBallChance = 1.0f;
     private BrickItemEffect ChooseItemEffect()
     {
@@ -36,10 +36,10 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.AddBall;
         }
-        //else if (randomValue < ballPowerUpChance)
-        //{
-        //    return BrickItemEffect.BallPowerUp;
-        //}
+        else if (randomValue < ballPowerUpChance)
+        {
+            return BrickItemEffect.BallPowerUp;
+        }
         else
         {
             return BrickItemEffect.MagenticBall;
@@ -58,9 +58,9 @@ public class ItemBrick : MonoBehaviour
             case BrickItemEffect.AddBall:
                 GameObject newObject = Instantiate(ball, transform.position, Quaternion.identity);
                 break;
-            //case BrickItemEffect.BallPowerUp:
-
-            //break;
+            case BrickItemEffect.BallPowerUp:
+                ball.GetComponent<BallControl>().BallPowerUp();
+                break;
             case BrickItemEffect.MagenticBall:
                 ball.GetComponent<BallControl>().MagneticBall();
                 break;

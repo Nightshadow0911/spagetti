@@ -15,6 +15,8 @@ public class BallControl : MonoBehaviour
     private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
+    private bool isPoweredUp = false;
+    private float powerUpDuration = 10.0f;
 
     private Vector2 _initPos;
 
@@ -105,6 +107,24 @@ public class BallControl : MonoBehaviour
     public void MagneticBall()
     {
         isMagnetic = true;
+    }
+    public void BallPowerUp()
+    {   
+        if (!isPoweredUp)
+        {
+            isPoweredUp = true;
+            StartCoroutine(EndPowerUp());
+            
+        }
+    }
+    private IEnumerator EndPowerUp()
+    {
+        // 일정 시간 후 강화 종료
+        yield return new WaitForSeconds(powerUpDuration);
+
+        // 강화 종료
+        isPoweredUp = false;
+        //강화된 부분을 다시 되돌리는 부분이 필요
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
