@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public enum SceneType
 {
     StartScene,
-    Juchan_MainSceneClone,
+    Stage1,
     CreditScene,
 }
 
@@ -90,7 +90,7 @@ public class SceneFader : MonoBehaviour
             case SceneType.StartScene:
                 SoundManager.Instance.PlayBGM(BGM.MainMenu);
                 break;
-            case SceneType.Juchan_MainSceneClone:
+            case SceneType.Stage1:
                 SoundManager.Instance.PlayBGM(BGM.InGame);
                 break;
             case SceneType.CreditScene:
