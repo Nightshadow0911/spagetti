@@ -78,10 +78,11 @@ public class ItemBrick : MonoBehaviour
     private void OnDestroy()
     {
         float random = Random.Range(0f, 1f);
-        if (random < 0.2f)
-        {
-            BrickItemEffect selectedEffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
-            ApplyItemEffect(selectedEffect); // 선택된 효과를 적용
-        }      
+        //if (random < 0.2f)
+        //{
+        //    BrickItemEffect selectedEffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
+        //    ApplyItemEffect(selectedEffect); // 선택된 효과를 적용
+        //}      
+        ApplyItemEffect(BrickItemEffect.MagenticBall);
     }
 }

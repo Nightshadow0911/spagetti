@@ -58,17 +58,12 @@ public class BallControl : MonoBehaviour
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
-        if (isMagnetic)
-        {
-            Reset();
-            isMagnetic = false;
-        }
+        
     }
 
     private void Reset()
     {
         isStopped = true;
-        transform.parent = paddle.transform;
         transform.position = _initPos;
 
     }
@@ -100,7 +95,11 @@ public class BallControl : MonoBehaviour
     }
     public void MagneticBall()
     {
-        isMagnetic = true;
+        Reset();
+        if (ballRigidbody != null)
+        {
+            ballRigidbody.velocity = Vector2.zero;
+        }
     }
     //public void BallPowerUp()
     //{   
@@ -129,7 +128,6 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-
             Destroy(collision.gameObject);
             GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
