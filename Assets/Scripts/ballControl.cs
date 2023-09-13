@@ -33,7 +33,7 @@ public class BallControl : MonoBehaviour
         {
             ballRigidbody.velocity = Vector2.zero;
         }
-        
+        moveSpeed = 5f;
         Reset();
 
     }
@@ -54,9 +54,8 @@ public class BallControl : MonoBehaviour
         }
         else
         {
+            moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
-            
-
         }
 
         if (isMagnetic)

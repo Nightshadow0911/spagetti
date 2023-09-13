@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 2944016486847890384}
   - component: {fileID: -8068971738516189030}
   - component: {fileID: -2621243217185812336}
-
   - component: {fileID: -6419046655552854842}
-
+  - component: {fileID: 14713394542734385}
   m_Layer: 0
   m_Name: Brick
   m_TagString: Brick
@@ -146,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0adf894128ca745b85869781071135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
+  ball: {fileID: 0}
 --- !u!50 &-6419046655552854842
 Rigidbody2D:
   serializedVersion: 4
@@ -174,3 +173,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &14713394542734385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317770192142502733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392a3eaf583e9964abf16b8c376281f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPaddle: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
+  ball: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+  sizeChance: 0.2
+  speedChance: 0.4
+  addBallChance: 0.6
+  ballPowerUpChance: 0.8
+  MagenticBallChance: 1

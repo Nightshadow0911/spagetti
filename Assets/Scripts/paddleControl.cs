@@ -11,7 +11,7 @@ public class PaddleControl : MonoBehaviour
 
     void Start()
     {
-    
+        playerPaddle.localScale = new Vector3(3f,0.3f,0);
     }
 
     void Update()
