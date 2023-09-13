@@ -157,8 +157,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.CallNameChanged(PlayerName);
     }
 
-    // 벽돌이 다 깨졌을 때 연동
-
     public void RemoveBrickFromList(BrickControl brick)
     {
         _brickList.Remove(brick);
@@ -212,8 +210,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    // 에디터용
+#if UNITY_EDITOR
     public void Clear()
     {
         GameClear();
     }
+
+    public void Over()
+    {
+        GameOver();
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+    }
+#endif
 }
