@@ -35,7 +35,7 @@ public class LifeBarUI : MonoBehaviour
     {
         if (isIncreasing)
         {
-            lifeBars[GameManager.Instance.Life].SetActive(true);
+            lifeBars[GameManager.Instance.Life - 1].SetActive(true);
         }
         else
         {
