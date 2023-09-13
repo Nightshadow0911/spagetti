@@ -10,6 +10,7 @@ public class BallControl : MonoBehaviour
     public Rigidbody2D ballRigidbody;
     public GameObject paddle;
     public float moveSpeed = 5f;
+    public float accelerationRate = 0.2f;
     private Vector2 randomDirection;
     private bool isStopped;
     private bool isMagnetic=false;
@@ -51,6 +52,7 @@ public class BallControl : MonoBehaviour
         }
         else
         {
+            moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
@@ -143,13 +145,14 @@ public class BallControl : MonoBehaviour
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
             randomDirection = reflectionDirection.normalized;
 
-
+            SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))
         {
+            SoundManager.Instance.PlaySFX(SFX.OnHitBar);
             randomDirection.y *= -1;
         }
 
@@ -163,6 +166,7 @@ public class BallControl : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
         {
+            SoundManager.Instance.PlaySFX(SFX.LifeDown);
             Reset();
             GameManager.Instance.DecreaseLife();
         }

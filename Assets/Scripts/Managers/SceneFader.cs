@@ -94,7 +94,7 @@ public class SceneFader : MonoBehaviour
                 SoundManager.Instance.PlayBGM(BGM.InGame);
                 break;
             case SceneType.CreditScene:
-                // Å©·¹µ÷ À½¾Ç
+                SoundManager.Instance.PlayBGM(BGM.Credit);
                 break;
         }
     }
