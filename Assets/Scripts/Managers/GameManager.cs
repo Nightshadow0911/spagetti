@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject EdgeLine;
 
+    public GameObject Ball;
+    public GameObject Paddle;
+
     private List<BrickControl> _brickList = new List<BrickControl>();
 
 
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
         Init();
         MakeBricks();
         MakeEdge();
+        Makeballpaddle();
     }
     public void MakeBricks()
     {
@@ -77,7 +81,15 @@ public class GameManager : MonoBehaviour
     {
         Vector3 EdgePosition = new Vector3(0f, 5f, 0f);
 
-        GameObject brick = Instantiate(EdgeLine, transform.position + EdgePosition, Quaternion.identity);
+        GameObject edgeLine = Instantiate(EdgeLine, transform.position + EdgePosition, Quaternion.identity);
+    }
+
+    public void Makeballpaddle()
+    {
+        Vector3 BallPosition = new Vector3(0f, -3f, 0f);
+        Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
+        GameObject ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
+        GameObject paddle = Instantiate(Paddle, transform.position + PaddlePosition, Quaternion.identity);
     }
 
     
