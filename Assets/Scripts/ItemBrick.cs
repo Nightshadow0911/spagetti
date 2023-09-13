@@ -13,16 +13,17 @@ public class ItemBrick : MonoBehaviour
         BallSpeedChange,
         AddBall,
         BallPowerUp,
-        MagenticBall
+        MagenticBall,
+        LifeUp
     }
     public float sizeChance = 0.2f;
     public float speedChance = 0.4f;
     public float addBallChance = 0.6f;
     public float ballPowerUpChance = 0.8f;
-    //public float MagenticBallChance = 1.0f;
+    public float MagenticBallChance = 1.0f;
     private BrickItemEffect ChooseItemEffect()
     {
-        float randomValue = Random.Range(0f, 1f);
+        float randomValue = Random.Range(0f, 1.2f);
 
         if (randomValue < sizeChance)
         {
@@ -40,9 +41,13 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.BallPowerUp;
         }
-        else
+        else if(randomValue < MagenticBallChance)
         {
             return BrickItemEffect.MagenticBall;
+        }
+        else
+        {
+            return BrickItemEffect.LifeUp;
         }
     }
     private void ApplyItemEffect(BrickItemEffect effect)
@@ -64,7 +69,9 @@ public class ItemBrick : MonoBehaviour
             case BrickItemEffect.MagenticBall:
                 ball.GetComponent<BallControl>().MagneticBall();
                 break;
-
+            case BrickItemEffect.LifeUp:
+                GameManager.Instance.IncreaseLife();
+                break;
         }
     }
     private void OnDestroy()
