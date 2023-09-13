@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject EdgeLine;
 
+    private List<BrickControl> _brickList = new List<BrickControl>();
+
 
     private void Awake()
     {
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
 
+                _brickList.Add(brickControl);
+
                 if (brickControl != null)
                 {
                     brickControl.InitializeBrick(brickPosition); // 벽돌의 위치를 전달하여 초기화
@@ -76,11 +80,7 @@ public class GameManager : MonoBehaviour
         GameObject brick = Instantiate(EdgeLine, transform.position + EdgePosition, Quaternion.identity);
     }
 
-    private void Init()
-    {
-        SetPlayerName();
-        Time.timeScale = 1.0f;
-    }
+    
 
 
     // 벽돌 깨졌을 때 연동
@@ -90,18 +90,19 @@ public class GameManager : MonoBehaviour
         // ScoreUI 연동
         UIManager.Instance.CallScoreChanged(Score);
 
-        if (HighScore > score)
+        if (HighScore < Score)
         {
             SetHighScore(Score);
             UIManager.Instance.CallHighScoreChanged(Score);
         }
+
+        if (_brickList.Count == 0) 
+        {
+            GameClear();
+        }
     }
 
-    private void SetHighScore(int score)
-    {
-        HighScore = score;
-        PlayerPrefs.SetInt(HIGH_SCORE, score);
-    }
+    
 
     // 플레이어 바 라인에 공이 닿으면 생명 감소 연동
     public void DecreaseLife()
@@ -132,14 +133,14 @@ public class GameManager : MonoBehaviour
     public void SetPlayerName()
     {
         PlayerName = PlayerPrefs.GetString("PlayerName");
-        UIManager.Instance.CallNameChanged(name);
+        UIManager.Instance.CallNameChanged(PlayerName);
     }
 
     // 벽돌이 다 깨졌을 때 연동
-    public void GameClear()
+
+    public void RemoveBrickFromList(BrickControl brick)
     {
-        UIManager.Instance.CallGameEnded(true);
-        Time.timeScale = 0;
+        _brickList.Remove(brick);
     }
 
     private void GameOver()
@@ -147,5 +148,40 @@ public class GameManager : MonoBehaviour
         // 게임 종료
         UIManager.Instance.CallGameEnded(false);
         Time.timeScale = 0;
+    }
+
+    private void GameClear()
+    {
+        SetHighScoreToPlyaerPrefs();
+        UIManager.Instance.CallGameEnded(true);
+        Time.timeScale = 0;
+    }
+
+    private void SetHighScore(int score)
+    {
+        HighScore = score;
+    }
+
+    private void SetHighScoreToPlyaerPrefs()
+    {
+        PlayerPrefs.SetInt(HIGH_SCORE, HighScore);
+    }
+
+    private void SetHighScoreUI()
+    {
+        int highScore = PlayerPrefs.GetInt(HIGH_SCORE);
+        UIManager.Instance.CallHighScoreChanged(highScore);
+    }
+
+    private void Init()
+    {
+        SetPlayerName();
+        SetHighScoreUI();
+        Time.timeScale = 1.0f;
+    }
+
+    public void Clear()
+    {
+        GameClear();
     }
 }
