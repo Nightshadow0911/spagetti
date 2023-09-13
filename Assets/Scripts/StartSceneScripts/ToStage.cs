@@ -10,4 +10,6 @@ public class ToStage : MonoBehaviour
     {
         SceneFader.Instance.FadeToScene(stageNum);
     }
+
+    
 }
