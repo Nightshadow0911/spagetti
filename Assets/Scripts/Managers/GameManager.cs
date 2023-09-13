@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public float ybrickSpacing = 0.5f; // 세로 벽돌 간격
 
     public GameObject EdgeLine;
-
     public GameObject Ball;
     public GameObject Paddle;
 
@@ -94,9 +93,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
-
-
     // 벽돌 깨졌을 때 연동
     public void AddScore(int score)
     {
@@ -122,6 +118,7 @@ public class GameManager : MonoBehaviour
     public void DecreaseLife()
     {
         Life--;
+
 
         UIManager.Instance.CallLifeChanged(false);
 
