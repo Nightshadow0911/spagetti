@@ -98,8 +98,10 @@ public class GameManager : MonoBehaviour
     {
         Vector3 BallPosition = new Vector3(0f, -3f, 0f);
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
-        GameObject ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
         GameObject paddle = Instantiate(Paddle, transform.position + PaddlePosition, Quaternion.identity);
+        GameObject ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
+        ball.GetComponent<BallControl>().paddle = paddle;
+
     }
 
     
