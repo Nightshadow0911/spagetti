@@ -51,3 +51,5 @@ MonoBehaviour:
   columns: 14
   xbrickSpacing: 1.2
   ybrickSpacing: 0.5
+  EdgeLine: {fileID: 6869019881936550462, guid: 84ab4f3b195196041a05cbbede9e963c, type: 3}
+  Ball: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
