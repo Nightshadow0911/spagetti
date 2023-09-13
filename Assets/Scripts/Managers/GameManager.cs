@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
 
                 GameObject brick = Instantiate(Brick, transform.position + brickPosition, Quaternion.identity);
                 BrickControl brickControl = brick.GetComponent<BrickControl>();
+                brickControl.ball = Ball;
 
                 // Stage1의 Index가 1부터 시작한다는 가정 하에 만듬
                 SceneType type = SceneFader.Instance.GetCurrentSceneType();
@@ -99,8 +100,8 @@ public class GameManager : MonoBehaviour
         Vector3 BallPosition = new Vector3(0f, -3f, 0f);
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
         GameObject paddle = Instantiate(Paddle, transform.position + PaddlePosition, Quaternion.identity);
-        GameObject ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
-        ball.GetComponent<BallControl>().paddle = paddle;
+        Ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
+        Ball.GetComponent<BallControl>().paddle = paddle;
 
     }
 
@@ -117,7 +118,6 @@ public class GameManager : MonoBehaviour
         if (HighScore < Score)
         {
             SetHighScore(Score);
-            UIManager.Instance.CallHighScoreChanged(Score);
         }
 
         if (_brickList.Count == 0) 
@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
     private void SetHighScore(int score)
     {
         HighScore = score;
+        SetHighScoreUI();
     }
 
     private void SetHighScoreToPlyaerPrefs()
@@ -198,14 +199,19 @@ public class GameManager : MonoBehaviour
 
     private void SetHighScoreUI()
     {
-        int highScore = PlayerPrefs.GetInt(HIGH_SCORE);
-        UIManager.Instance.CallHighScoreChanged(highScore);
+        UIManager.Instance.CallHighScoreChanged(HighScore);
+    }
+
+    private void InitHighScore()
+    {
+        HighScore = PlayerPrefs.GetInt(HIGH_SCORE);
+        SetHighScoreUI();
     }
 
     private void Init()
     {
         SetPlayerName();
-        SetHighScoreUI();
+        InitHighScore();
         Time.timeScale = 1.0f;
     }
 

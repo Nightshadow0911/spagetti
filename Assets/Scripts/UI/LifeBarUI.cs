@@ -40,7 +40,7 @@ public class LifeBarUI : MonoBehaviour
         else
         {
             // 라이프가 깎인 후 SetActive이므로 그냥 Life를 불러옴
-            if (GameManager.Instance.Life > 0)
+            if (GameManager.Instance.Life >= 0)
             {
                 lifeBars[GameManager.Instance.Life].SetActive(false);
             }
