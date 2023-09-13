@@ -37,10 +37,10 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.AddBall;
         }
-        else if (randomValue < ballPowerUpChance)
-        {
-            return BrickItemEffect.BallPowerUp;
-        }
+        //else if (randomValue < ballPowerUpChance)
+        //{
+        //    return BrickItemEffect.BallPowerUp;
+        //}
         else if(randomValue < MagenticBallChance)
         {
             return BrickItemEffect.MagenticBall;
@@ -64,9 +64,9 @@ public class ItemBrick : MonoBehaviour
                 Vector3 BallPosition = new Vector3 (0f, -3f, 0f);
                 GameObject Ball = Instantiate(ball, BallPosition, Quaternion.identity);
                 break;
-            case BrickItemEffect.BallPowerUp:
-                ball.GetComponent<BallControl>().BallPowerUp();
-                break;
+            //case BrickItemEffect.BallPowerUp:
+            //    ball.GetComponent<BallControl>().BallPowerUp();
+            //    break;
             case BrickItemEffect.MagenticBall:
                 ball.GetComponent<BallControl>().MagneticBall();
                 break;

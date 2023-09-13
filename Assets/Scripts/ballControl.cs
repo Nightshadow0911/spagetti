@@ -16,7 +16,7 @@ public class BallControl : MonoBehaviour
     private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
-    private bool isPoweredUp = false;
+    private bool isPowereUp = false;
     private float powerUpDuration = 10.0f;
     public int ballPower = 1;
 
@@ -60,16 +60,8 @@ public class BallControl : MonoBehaviour
 
         if (isMagnetic)
         {
-            // 공과 패들 사이의 거리 계산
-            float distance = Vector2.Distance(transform.position, paddleTransform.position);
-
-            if (distance <= magneticRadius)
-            {
-                 // 자석 효과 종료
-                ballRigidbody.velocity = Vector2.zero;
-                isStopped = true;
-                isMagnetic = false;
-            }
+            Reset();
+            isMagnetic = false;
         }
     }
 
@@ -110,24 +102,24 @@ public class BallControl : MonoBehaviour
     {
         isMagnetic = true;
     }
-    public void BallPowerUp()
-    {   
-        if (!isPoweredUp)
-        {
-            isPoweredUp = true;
-            ballPower = 10;
-            StartCoroutine(EndPowerUp());          
-        }
-    }
-    private IEnumerator EndPowerUp()
-    {
-        // 일정 시간 후 강화 종료
-        yield return new WaitForSeconds(powerUpDuration);
+    //public void BallPowerUp()
+    //{   
+    //    if (!isPoweredUp)
+    //    {
+    //        isPoweredUp = true;
+    //        ballPower = 2;
+    //        StartCoroutine(EndPowerUp());          
+    //    }
+    //}
+    //private IEnumerator EndPowerUp()
+    //{
+    //    // 일정 시간 후 강화 종료
+    //    yield return new WaitForSeconds(powerUpDuration);
 
-        // 강화 종료
-        ballPower = 1;
-        isPoweredUp = false;
-    }
+    //    // 강화 종료
+    //    ballPower = 1;
+    //    isPowereUp = false;
+    //}
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);

@@ -98,10 +98,9 @@ public class GameManager : MonoBehaviour
     {
         Vector3 BallPosition = new Vector3(0f, -3f, 0f);
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
-        GameObject paddle = Instantiate(Paddle, transform.position + PaddlePosition, Quaternion.identity);
-        Ball = Instantiate(Ball, transform.position + BallPosition, Quaternion.identity);
+        GameObject paddle = Instantiate(Paddle, PaddlePosition, Quaternion.identity);
+        Ball = Instantiate(Ball, BallPosition, Quaternion.identity);
         Ball.GetComponent<BallControl>().paddle = paddle;
-
     }
 
     // 벽돌 깨졌을 때 연동
