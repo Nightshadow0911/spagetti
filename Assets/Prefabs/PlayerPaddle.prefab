@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3606338185286038940}
   - component: {fileID: 8918430108291943407}
   - component: {fileID: 3347312253310468293}
-  - component: {fileID: -6293212558293152317}
   m_Layer: 0
   m_Name: PlayerPaddle
   m_TagString: Paddle
@@ -147,21 +146,3 @@ MonoBehaviour:
   paddleSpeed: 5
   paddle: {fileID: 5872537011133262846}
   playerPaddle: {fileID: 3095953124059495999}
---- !u!114 &-6293212558293152317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5872537011133262846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8be3b5e22c548304fa395f4e0e85c22e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 100
-  ballRigidbody: {fileID: 1520979589313857147, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
-  paddle: {fileID: 0}
-  moveSpeed: 5
-  accelerationRate: 0.2
-  magneticRadius: 1.5
