@@ -33,7 +33,7 @@ public class SceneWindow : EditorWindow
         {
             if (Application.isPlaying)
             {
-                SceneManager.LoadScene($"{PATH}{_sceneType}.unity");
+                SceneFader.Instance.FadeToScene((int)_sceneType);
             }
             else
             {
