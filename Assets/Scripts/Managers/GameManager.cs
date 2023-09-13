@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
     public float ybrickSpacing = 0.5f; // 세로 벽돌 간격
 
     public GameObject EdgeLine;
+    public GameObject BallPrefab;
     public GameObject Ball;
+    public GameObject PaddlePrefab;
     public GameObject Paddle;
 
     private List<BrickControl> _brickList = new List<BrickControl>();
@@ -98,9 +100,9 @@ public class GameManager : MonoBehaviour
     {
         Vector3 BallPosition = new Vector3(0f, -3f, 0f);
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
-        GameObject paddle = Instantiate(Paddle, PaddlePosition, Quaternion.identity);
-        Ball = Instantiate(Ball, BallPosition, Quaternion.identity);
-        Ball.GetComponent<BallControl>().paddle = paddle;
+        Paddle = Instantiate(PaddlePrefab, PaddlePosition, Quaternion.identity);
+        Ball = Instantiate(BallPrefab, BallPosition, Quaternion.identity);
+        Ball.GetComponent<BallControl>().paddle = Paddle;
     }
 
     // 벽돌 깨졌을 때 연동
