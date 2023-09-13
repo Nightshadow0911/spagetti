@@ -7,6 +7,7 @@ public enum BGM
 {
     MainMenu,
     InGame,
+    Credit,
 }
 
 public enum SFX
@@ -17,6 +18,7 @@ public enum SFX
     OnHitBlock1,
     OnHitBlock2,
     OnHitBar,
+    StageClear,
 }
 
 public class SoundManager : MonoBehaviour

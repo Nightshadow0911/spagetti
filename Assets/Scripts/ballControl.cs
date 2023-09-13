@@ -106,13 +106,14 @@ public class BallControl : MonoBehaviour
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
             randomDirection = reflectionDirection.normalized;
 
-
+            SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))
         {
+            SoundManager.Instance.PlaySFX(SFX.OnHitBar);
             randomDirection.y *= -1;
         }
 
@@ -126,6 +127,7 @@ public class BallControl : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
         {
+            SoundManager.Instance.PlaySFX(SFX.LifeDown);
             Reset();
             GameManager.Instance.DecreaseLife();
         }

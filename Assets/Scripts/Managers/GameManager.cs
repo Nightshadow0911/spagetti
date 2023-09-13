@@ -147,12 +147,14 @@ public class GameManager : MonoBehaviour
     {
         // 게임 종료
         UIManager.Instance.CallGameEnded(false);
+        SoundManager.Instance.PlaySFX(SFX.Dead);
         Time.timeScale = 0;
     }
 
     private void GameClear()
     {
         SetHighScoreToPlyaerPrefs();
+        SoundManager.Instance.PlaySFX(SFX.StageClear);
         UIManager.Instance.CallGameEnded(true);
         Time.timeScale = 0;
     }
