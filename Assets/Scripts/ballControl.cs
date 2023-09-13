@@ -13,7 +13,6 @@ public class BallControl : MonoBehaviour
     public float accelerationRate = 0.2f;
     private Vector2 randomDirection;
     private bool isStopped;
-    private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
     private bool isPowereUp = false;
@@ -58,17 +57,12 @@ public class BallControl : MonoBehaviour
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
         }
 
-        if (isMagnetic)
-        {
-            Reset();
-            isMagnetic = false;
-        }
+        
     }
 
     private void Reset()
     {
         isStopped = true;
-        transform.parent = paddle.transform;
         transform.position = _initPos;
 
     }
@@ -94,32 +88,18 @@ public class BallControl : MonoBehaviour
             }
             else
             {
-                moveSpeed -= 2f;
+                moveSpeed -= 3f;
             }
         }
     }
     public void MagneticBall()
     {
-        isMagnetic = true;
+        Reset();
+        if (ballRigidbody != null)
+        {
+            ballRigidbody.velocity = Vector2.zero;
+        }
     }
-    //public void BallPowerUp()
-    //{   
-    //    if (!isPoweredUp)
-    //    {
-    //        isPoweredUp = true;
-    //        ballPower = 2;
-    //        StartCoroutine(EndPowerUp());          
-    //    }
-    //}
-    //private IEnumerator EndPowerUp()
-    //{
-    //    // 일정 시간 후 강화 종료
-    //    yield return new WaitForSeconds(powerUpDuration);
-
-    //    // 강화 종료
-    //    ballPower = 1;
-    //    isPowereUp = false;
-    //}
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
@@ -129,8 +109,10 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
+
             BrickControl brickControl = collision.collider.GetComponent<BrickControl>();
             GameManager.Instance.RemoveBrickFromList(brickControl);
+
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
 
