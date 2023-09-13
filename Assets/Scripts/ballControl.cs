@@ -13,7 +13,6 @@ public class BallControl : MonoBehaviour
     public float accelerationRate = 0.2f;
     private Vector2 randomDirection;
     private bool isStopped;
-    private bool isMagnetic=false;
     private Transform paddleTransform;
     public float magneticRadius = 1.5f;
     private bool isPowereUp = false;
@@ -89,7 +88,7 @@ public class BallControl : MonoBehaviour
             }
             else
             {
-                moveSpeed -= 2f;
+                moveSpeed -= 3f;
             }
         }
     }
@@ -101,24 +100,6 @@ public class BallControl : MonoBehaviour
             ballRigidbody.velocity = Vector2.zero;
         }
     }
-    //public void BallPowerUp()
-    //{   
-    //    if (!isPoweredUp)
-    //    {
-    //        isPoweredUp = true;
-    //        ballPower = 2;
-    //        StartCoroutine(EndPowerUp());          
-    //    }
-    //}
-    //private IEnumerator EndPowerUp()
-    //{
-    //    // 일정 시간 후 강화 종료
-    //    yield return new WaitForSeconds(powerUpDuration);
-
-    //    // 강화 종료
-    //    ballPower = 1;
-    //    isPowereUp = false;
-    //}
     void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
