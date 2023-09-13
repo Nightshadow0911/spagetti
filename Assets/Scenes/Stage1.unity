@@ -1210,6 +1210,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
+      propertyPath: Paddle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
+      propertyPath: BallPrefab
+      value: 
+      objectReference: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
+      propertyPath: PaddlePrefab
+      value: 
+      objectReference: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
