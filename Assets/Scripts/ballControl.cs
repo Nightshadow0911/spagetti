@@ -98,7 +98,6 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
             float incidenceAngle = Vector2.Angle(randomDirection, -collisionVector);
@@ -106,9 +105,10 @@ public class BallControl : MonoBehaviour
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
             randomDirection = reflectionDirection.normalized;
 
-            SoundManager.Instance.PlaySFX(SFX.Break);
+            BrickControl brickControl = collision.transform.GetComponent<BrickControl>();
+            brickControl.DecreaseLife();
+
             GameManager.Instance.AddScore(score);
-            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))

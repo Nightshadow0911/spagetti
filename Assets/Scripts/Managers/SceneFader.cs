@@ -43,6 +43,11 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(FadeOut(sceneIndex));
     }
 
+    public SceneType GetCurrentSceneType()
+    {
+        return (SceneType)SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void ChangeToNextScene()
     {
         //string nextSceneName = "다음 씬의 이름"; // 다음 씬의 이름으로 바꿔야 합니다.
