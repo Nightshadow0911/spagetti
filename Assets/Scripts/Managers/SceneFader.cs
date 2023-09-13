@@ -7,6 +7,8 @@ public enum SceneType
 {
     StartScene,
     Stage1,
+    Stage2,
+    Stage3,
     CreditScene,
 }
 

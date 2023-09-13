@@ -14,7 +14,7 @@ public enum BrickType
 public class BrickControl : MonoBehaviour
 {
     public int Life { get; private set; }
-
+    public GameObject ball;
     private SpriteRenderer _renderer;
 
     private void Awake()
@@ -31,7 +31,7 @@ public class BrickControl : MonoBehaviour
 
     public void DecreaseLife()
     {
-        Life--;
+        Life -= ball.GetComponent<BallControl>().ballPower;
         if (Life <= 0)
         {
             SoundManager.Instance.PlaySFX(SFX.Break);
@@ -85,6 +85,7 @@ public class BrickControl : MonoBehaviour
     private void SetLife(int life)
     {
         Life = life;
+        SetColor();
     }
 
 
