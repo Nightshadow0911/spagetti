@@ -56,6 +56,8 @@ public class BallControl : MonoBehaviour
         {
             moveSpeed += accelerationRate * Time.deltaTime;
             transform.Translate(randomDirection * moveSpeed * Time.deltaTime);
+            
+
         }
 
         if (isMagnetic)
@@ -137,23 +139,58 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
+
+            Destroy(collision.gameObject);
+            GameManager.Instance.RemoveBrickFromList(collision.collider.GetComponent<BrickControl>());
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
+
+            // 입사 각도 계산
             float incidenceAngle = Vector2.Angle(randomDirection, -collisionVector);
+
+            // 최소 반사 각도 설정 (예: 30도)
+            float minReflectionAngle = 30f;
+
+            if (incidenceAngle < minReflectionAngle)
+            {
+                // 입사 각도가 최소 반사 각도보다 작으면 최소 반사 각도로 설정
+                incidenceAngle = minReflectionAngle;
+            }
+
+            // 반사 각도 계산
             float reflectionAngle = 2 * incidenceAngle;
             Vector2 reflectionDirection = Quaternion.Euler(0, 0, reflectionAngle) * -collisionVector.normalized;
+
+            // 공의 방향을 반사 방향으로 설정하여 공이 벽돌에서 튕겨 나가도록 합니다.
             randomDirection = reflectionDirection.normalized;
 
-            BrickControl brickControl = collision.transform.GetComponent<BrickControl>();
-            brickControl.DecreaseLife();
 
+
+            SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))
         {
             SoundManager.Instance.PlaySFX(SFX.OnHitBar);
-            randomDirection.y *= -1;
+
+            Vector2 collisionvector = collision.contacts[0].point;
+            Vector2 paddleCenter = paddleTransform.position;
+
+            float paddleWidth = paddleTransform.localScale.x;
+
+            float halfPaddleWidth = paddleWidth / 2f;
+
+            float distanceFromCenter = collisionvector.x - paddleCenter.x;
+            float relativePositionRatio = distanceFromCenter / halfPaddleWidth;
+
+            float minReflectionAngle = -45f;
+            float maxReflectionAngle = 45f;
+
+            float reflectionAngle = Mathf.Lerp(minReflectionAngle, maxReflectionAngle, (relativePositionRatio + 1f) / 2f);
+
+            Vector2 newDirection = Quaternion.Euler(0, 0, reflectionAngle) * Vector2.up;
+            randomDirection = newDirection.normalized;
         }
 
         if (collision.gameObject.CompareTag("horizontal"))
@@ -169,6 +206,7 @@ public class BallControl : MonoBehaviour
             SoundManager.Instance.PlaySFX(SFX.LifeDown);
             Reset();
             GameManager.Instance.DecreaseLife();
+            moveSpeed = 5.0f;
         }
     }
 }
