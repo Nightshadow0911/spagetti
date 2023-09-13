@@ -12,17 +12,18 @@ public class ItemBrick : MonoBehaviour
         PaddleSizeChange,
         BallSpeedChange,
         AddBall,
-        //BallPowerUp,
-        MagenticBall
+        BallPowerUp,
+        MagenticBall,
+        LifeUp
     }
     public float sizeChance = 0.2f;
     public float speedChance = 0.4f;
     public float addBallChance = 0.6f;
-    //public float ballPowerUpChance = 0.8f;
-    //public float MagenticBallChance = 1.0f;
+    public float ballPowerUpChance = 0.8f;
+    public float MagenticBallChance = 1.0f;
     private BrickItemEffect ChooseItemEffect()
     {
-        float randomValue = Random.Range(0f, 1f);
+        float randomValue = Random.Range(0f, 1.2f);
 
         if (randomValue < sizeChance)
         {
@@ -36,13 +37,17 @@ public class ItemBrick : MonoBehaviour
         {
             return BrickItemEffect.AddBall;
         }
-        //else if (randomValue < ballPowerUpChance)
-        //{
-        //    return BrickItemEffect.BallPowerUp;
-        //}
-        else
+        else if (randomValue < ballPowerUpChance)
+        {
+            return BrickItemEffect.BallPowerUp;
+        }
+        else if(randomValue < MagenticBallChance)
         {
             return BrickItemEffect.MagenticBall;
+        }
+        else
+        {
+            return BrickItemEffect.LifeUp;
         }
     }
     private void ApplyItemEffect(BrickItemEffect effect)
@@ -58,13 +63,15 @@ public class ItemBrick : MonoBehaviour
             case BrickItemEffect.AddBall:
                 GameObject newObject = Instantiate(ball, transform.position, Quaternion.identity);
                 break;
-            //case BrickItemEffect.BallPowerUp:
-
-            //break;
+            case BrickItemEffect.BallPowerUp:
+                ball.GetComponent<BallControl>().BallPowerUp();
+                break;
             case BrickItemEffect.MagenticBall:
                 ball.GetComponent<BallControl>().MagneticBall();
                 break;
-
+            case BrickItemEffect.LifeUp:
+                GameManager.Instance.IncreaseLife();
+                break;
         }
     }
     private void OnDestroy()
