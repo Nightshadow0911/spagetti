@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0adf894128ca745b85869781071135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ball: {fileID: 0}
 --- !u!4 &639718849
 Transform:
   m_ObjectHideFlags: 0
@@ -1699,7 +1700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db7eac3750129b499e6a853e5ac3969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionObj: {fileID: 3093912708287163535, guid: 4dbb4613f1003034fb791bde7b7383f5, type: 3}
 --- !u!114 &1611167168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2092,18 +2092,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
-    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
-      propertyPath: Paddle
-      value: 
-      objectReference: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
-    - target: {fileID: 7363648974650173729, guid: 5a9850fed3a26ec4498916f4d83a1884, type: 3}
-      propertyPath: EdgeLine
-      value: 
-      objectReference: {fileID: 6869019881936550462, guid: 84ab4f3b195196041a05cbbede9e963c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
