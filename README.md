@@ -117,11 +117,18 @@ https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf4
 - 메인화면
 - 인플레이 아이템
   - 공추가
+  https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/ItemBrick.cs#L58-L64
   - 생명추가
+  https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/Managers/GameManager.cs#L147-L156
   - 바 사이즈 증감
+  https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/paddleControl.cs#L33-L55
   - 공 속도 증감
+  https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/ballControl.cs#L78-L96
   - 자석기능
+  https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/ballControl.cs#L97C5-L104C6
 - 공,패들 움직임
+https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/ballControl.cs#L25-L53
+https://github.com/Nightshadow0911/spagetti/blob/929663ae1b1bff1c6aac2cc0f760616ad2acc9ab/Assets/Scripts/paddleControl.cs#L17-L32
 
 두희:
 - 사운드 리소스(배경음악, 효과음)
