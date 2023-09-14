@@ -25,6 +25,9 @@ public class SettingsUI : MonoBehaviour
         closeButton.onClick.AddListener(CloseSettings);
         settingsButton.onClick.AddListener(OpenSettings);
 
+        bgmSlider.value = SoundManager.Instance.GetBGMVolume();
+        sfxSlider.value = SoundManager.Instance.GetSFXVolume();
+
         settingsObj.SetActive(false);
     }
 
