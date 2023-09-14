@@ -13,6 +13,7 @@ public enum BrickType
 
 public class BrickControl : MonoBehaviour
 {
+    [field : SerializeField]
     public int Life { get; private set; }
     public GameObject ball;
     private SpriteRenderer _renderer;
@@ -29,7 +30,7 @@ public class BrickControl : MonoBehaviour
         SetLife(life);
     }
 
-    public void DecreaseLife(BallControl ball)
+    public void DecreaseLife()
     {
         Life --;
         if (Life <= 0)

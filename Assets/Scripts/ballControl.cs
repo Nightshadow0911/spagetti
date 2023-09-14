@@ -18,6 +18,7 @@ public class BallControl : MonoBehaviour
     private bool isPowereUp = false;
     private float powerUpDuration = 10.0f;
     public int ballPower = 1;
+    public bool IsMagnetic { get; set; }
 
     private Vector2 _initPos;
 
@@ -27,7 +28,7 @@ public class BallControl : MonoBehaviour
 
         ballRigidbody = GetComponent<Rigidbody2D>();
         paddleTransform = paddle.transform;
-        randomDirection = new Vector2(1, 1).normalized;
+        
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -62,9 +63,10 @@ public class BallControl : MonoBehaviour
 
     private void Reset()
     {
+        randomDirection = new Vector2(1, 1).normalized;
         isStopped = true;
         transform.position = _initPos;
-
+        moveSpeed = 5f;
     }
 
     private void Shoot()
@@ -94,7 +96,7 @@ public class BallControl : MonoBehaviour
     }
     public void MagneticBall()
     {
-        Reset();
+        IsMagnetic = true;
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -109,9 +111,7 @@ public class BallControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
-
             BrickControl brickControl = collision.collider.GetComponent<BrickControl>();
-
             Vector2 collisionVector = collision.contacts[0].point - (Vector2)collision.transform.position;
             Vector2 normalVector = collision.contacts[0].normal;
 
@@ -134,13 +134,19 @@ public class BallControl : MonoBehaviour
             // 공의 방향을 반사 방향으로 설정하여 공이 벽돌에서 튕겨 나가도록 합니다.
             randomDirection = reflectionDirection.normalized;
 
-            brickControl.DecreaseLife(this);
+            brickControl.DecreaseLife();
             SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
         }
 
         if (collision.gameObject.CompareTag("Paddle"))
         {
+            if (IsMagnetic)
+            {
+                Reset();
+                IsMagnetic = false;
+            }
+
             SoundManager.Instance.PlaySFX(SFX.OnHitBar);
 
             Vector2 collisionvector = collision.contacts[0].point;
@@ -173,9 +179,17 @@ public class BallControl : MonoBehaviour
         if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
         {
             SoundManager.Instance.PlaySFX(SFX.LifeDown);
-            Reset();
-            GameManager.Instance.DecreaseLife();
-            moveSpeed = 5.0f;
+            if (GameManager.Instance.ballList.Count > 1)
+            {
+                GameManager.Instance.ballList.Remove(this);
+                Destroy(gameObject);
+            }
+            else
+            {
+                Reset();
+                GameManager.Instance.DecreaseLife();
+                moveSpeed = 5.0f;
+            }
         }
     }
 }
