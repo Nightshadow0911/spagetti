@@ -52,4 +52,7 @@ MonoBehaviour:
   xbrickSpacing: 1.2
   ybrickSpacing: 0.5
   EdgeLine: {fileID: 6869019881936550462, guid: 84ab4f3b195196041a05cbbede9e963c, type: 3}
-  Ball: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+  BallPrefab: {fileID: 8493137136906975660, guid: 8ee49137df2c28941b5763a72a3e7b76, type: 3}
+  Ball: {fileID: 0}
+  PaddlePrefab: {fileID: 5872537011133262846, guid: 78a1988d1e0d79a469ce2ece9d8b0aba, type: 3}
+  Paddle: {fileID: 0}

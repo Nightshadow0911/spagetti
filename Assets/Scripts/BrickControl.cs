@@ -29,9 +29,9 @@ public class BrickControl : MonoBehaviour
         SetLife(life);
     }
 
-    public void DecreaseLife()
+    public void DecreaseLife(BallControl ball)
     {
-        Life -= ball.GetComponent<BallControl>().ballPower;
+        Life --;
         if (Life <= 0)
         {
             SoundManager.Instance.PlaySFX(SFX.Break);

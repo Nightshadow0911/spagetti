@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PaddleControl : MonoBehaviour
 {
-
-    public float paddleSpeed = 5f; // 패들의 이동 속도
     public GameObject paddle; // 생성된 패들에 대한 참조
     public Transform playerPaddle;
 
 
 
-    void Start(){
-    
+    void Start()
+    {
+        playerPaddle.localScale = new Vector3(3f,0.3f,0);
     }
 
     void Update()

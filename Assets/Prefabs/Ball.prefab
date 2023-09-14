@@ -167,3 +167,4 @@ MonoBehaviour:
   moveSpeed: 5
   accelerationRate: 0.2
   magneticRadius: 1.5
+  ballPower: 2
