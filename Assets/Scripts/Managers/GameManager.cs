@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
         SetHighScoreUI();
     }
 
-    private void Init()
+    public void Init()
     {
         SetPlayerName();
         InitHighScore();
