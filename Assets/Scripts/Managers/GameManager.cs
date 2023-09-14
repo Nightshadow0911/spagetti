@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public List<BrickControl> _brickList = new List<BrickControl>();
 
+    public List<BallControl> ballList = new List<BallControl>();
 
     private void Awake()
     {
@@ -102,7 +103,9 @@ public class GameManager : MonoBehaviour
         Vector3 PaddlePosition = new Vector3(0f, -4f, 0f);
         Paddle = Instantiate(PaddlePrefab, PaddlePosition, Quaternion.identity);
         Ball = Instantiate(BallPrefab, BallPosition, Quaternion.identity);
-        Ball.GetComponent<BallControl>().paddle = Paddle;
+        BallControl ballControl = Ball.GetComponent<BallControl>();
+        ballControl.paddle = Paddle;
+        ballList.Add(ballControl);
     }
 
     // 벽돌 깨졌을 때 연동
