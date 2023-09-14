@@ -13,6 +13,7 @@ public enum BrickType
 
 public class BrickControl : MonoBehaviour
 {
+    [field : SerializeField]
     public int Life { get; private set; }
     public GameObject ball;
     private SpriteRenderer _renderer;
