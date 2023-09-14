@@ -1,6 +1,6 @@
 **벽돌부수기**
 
-Sparta Coding Club C# 팀 프로젝트입니다.
+Sparta Coding Unity 팀 프로젝트입니다.
 
 추억의 벽돌깨기 게임을 유니티로 구현해보았습니다.
 
