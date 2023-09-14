@@ -107,8 +107,18 @@ public class SoundManager : MonoBehaviour
         _audioSources[(int)Sounds.BGM].volume = value;
     }
 
+    public float GetBGMVolume()
+    {
+        return _audioSources[(int)Sounds.BGM].volume;
+    }
+
     public void SetSFXVolume(float value)
     {
         _audioSources[(int)Sounds.SFX].volume = value;
+    }
+
+    public float GetSFXVolume()
+    {
+        return _audioSources[(int)Sounds.SFX].volume;
     }
 }
