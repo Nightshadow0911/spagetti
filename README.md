@@ -65,15 +65,19 @@ Unity 2022.3.8f1
 - 개발팀원명
 - 각자 맡은 작업
 
-**맡은 부분**
-***
+**
+맡은 부분
+**
 주찬
-***
-****게임 매니저****
+****
+게임 매니저
+****
 게임 전체적인 관리를 하는 게임 매니저를 구현하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/GameManager.cs#L1
 
-****UI****
+****
+UI
+****
 UI 매니저를 포함해 인게임 UI를 구현하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/UIManager.cs#L1
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/LifeBarUI.cs#L1
@@ -81,15 +85,21 @@ https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf4
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/ResultUI.cs#L1
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/ScoreUI.cs#L1
 
-****페이더 &씬연결****
+****
+페이더 &씬연결
+****
 장범님이 만드신 SceneFader에 씬 연결 부분을 추가하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/SceneFader.cs#L1
 
-****사운드 매니저****
+****
+사운드 매니저
+****
 사운드 매니저를 구현하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/SoundManager.cs#L1
 
-****- 게임 매니저 에디터, 씬 에디터****
+****
+게임 매니저 에디터, 씬 에디터
+****
 테스트를 위해 게임 매니저 에디터와 씬 에디터를 구현하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Editor/SceneWindow.cs#L1
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Editor/GameHelperEditor.cs#L1
