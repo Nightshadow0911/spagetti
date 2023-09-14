@@ -66,9 +66,9 @@ Unity 2022.3.8f1
 - 각자 맡은 작업
 
 **맡은 부분**
-
-***주찬***
-
+***
+주찬
+***
 ****게임 매니저****
 게임 전체적인 관리를 하는 게임 매니저를 구현하였습니다.
 https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/GameManager.cs#L1
