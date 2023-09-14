@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0adf894128ca745b85869781071135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Life>k__BackingField: 0
   ball: {fileID: 0}
 --- !u!4 &639718849
 Transform:
@@ -1514,7 +1515,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 87
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

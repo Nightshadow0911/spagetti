@@ -28,7 +28,7 @@ public class BallControl : MonoBehaviour
 
         ballRigidbody = GetComponent<Rigidbody2D>();
         paddleTransform = paddle.transform;
-        randomDirection = new Vector2(1, 1).normalized;
+        
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -63,9 +63,10 @@ public class BallControl : MonoBehaviour
 
     private void Reset()
     {
+        randomDirection = new Vector2(1, 1).normalized;
         isStopped = true;
         transform.position = _initPos;
-
+        moveSpeed = 5f;
     }
 
     private void Shoot()
