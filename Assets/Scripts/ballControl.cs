@@ -64,7 +64,7 @@ public class BallControl : MonoBehaviour
     {
         isStopped = true;
         transform.position = _initPos;
-
+        moveSpeed = 5f;
     }
 
     private void Shoot()
