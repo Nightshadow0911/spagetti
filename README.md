@@ -65,6 +65,59 @@ Unity 2022.3.8f1
 - 개발팀원명
 - 각자 맡은 작업
 
+**맡은 부분**
+***주찬***
+****게임 매니저****
+게임 전체적인 관리를 하는 게임 매니저를 구현하였습니다.
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/GameManager.cs#L1
+
+****UI****
+UI 매니저를 포함해 인게임 UI를 구현하였습니다.
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/UIManager.cs#L1
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/LifeBarUI.cs#L1
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/SettingsUI.cs#L1
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/ResultUI.cs#L1
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/UI/ScoreUI.cs#L1
+
+****페이더 &씬연결****
+장범님이 만드신 SceneFader에 씬 연결 부분을 추가하였습니다.
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/SceneFader.cs#L1
+
+****사운드 매니저****
+사운드 매니저를 구현하였습니다.
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Scripts/Managers/SoundManager.cs#L1
+
+****- 게임 매니저 에디터, 씬 에디터****
+테스트를 위해 게임 매니저 에디터와 씬 에디터를 구현하였습니다.
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Editor/SceneWindow.cs#L1
+https://github.com/Nightshadow0911/spagetti/blob/7568da3b351b7b4c36322b7dcb9ccf411667d806/Assets/Editor/GameHelperEditor.cs#L1
+
+
+병우:
+- 메인화면
+- 벽, 패들, 공, 벽돌, 외곽선 프리팹화 및 생성
+- 각 물체 간의 충돌 물리 시스템
+- 공 속도 및 가속도, 공이 떨어진 후 초기화
+- 
+    - 벽, 패들, 공, 벽돌 등 프리팹
+    - 각 물체 간의 충돌 물리
+
+민호:
+- 메인화면
+- 인프레이 아이템
+- 공,패들 움직임
+
+두희:
+- 사운드 리소스(배경음악, 효과음)
+- 게임 타임 매니저
+
+장범:
+- 게임시작화면
+- 크레딧화면
+- 씬전환 & 페이더효과
+- 디자인
+
+
 **버그 리포트**
 ***
 - Git 씬 충돌 → **씬 따로 만들기**
