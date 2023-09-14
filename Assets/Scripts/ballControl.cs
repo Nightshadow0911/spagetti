@@ -18,6 +18,7 @@ public class BallControl : MonoBehaviour
     private bool isPowereUp = false;
     private float powerUpDuration = 10.0f;
     public int ballPower = 1;
+    public bool IsMagnetic { get; set; }
 
     private Vector2 _initPos;
 
@@ -95,7 +96,7 @@ public class BallControl : MonoBehaviour
     }
     public void MagneticBall()
     {
-        Reset();
+        IsMagnetic = true;
         if (ballRigidbody != null)
         {
             ballRigidbody.velocity = Vector2.zero;
@@ -140,6 +141,12 @@ public class BallControl : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Paddle"))
         {
+            if (IsMagnetic)
+            {
+                Reset();
+                IsMagnetic = false;
+            }
+
             SoundManager.Instance.PlaySFX(SFX.OnHitBar);
 
             Vector2 collisionvector = collision.contacts[0].point;
