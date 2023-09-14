@@ -134,7 +134,7 @@ public class BallControl : MonoBehaviour
             // 공의 방향을 반사 방향으로 설정하여 공이 벽돌에서 튕겨 나가도록 합니다.
             randomDirection = reflectionDirection.normalized;
 
-            brickControl.DecreaseLife(this);
+            brickControl.DecreaseLife();
             SoundManager.Instance.PlaySFX(SFX.Break);
             GameManager.Instance.AddScore(score);
         }
@@ -179,9 +179,17 @@ public class BallControl : MonoBehaviour
         if (collision.gameObject.CompareTag("deadline")) //아래 내려가면 공 파괴, 체력감소
         {
             SoundManager.Instance.PlaySFX(SFX.LifeDown);
-            Reset();
-            GameManager.Instance.DecreaseLife();
-            moveSpeed = 5.0f;
+            if (GameManager.Instance.ballList.Count > 1)
+            {
+                GameManager.Instance.ballList.Remove(this);
+                Destroy(gameObject);
+            }
+            else
+            {
+                Reset();
+                GameManager.Instance.DecreaseLife();
+                moveSpeed = 5.0f;
+            }
         }
     }
 }

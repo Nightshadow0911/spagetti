@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class ItemBrick : MonoBehaviour
 {
@@ -57,7 +58,9 @@ public class ItemBrick : MonoBehaviour
             case BrickItemEffect.AddBall:
                 Vector3 BallPosition = new Vector3 (0f, -3f, 0f);
                 GameObject Ball = Instantiate(ball, BallPosition, Quaternion.identity);
-                Ball.GetComponent<BallControl>().paddle = GameManager.Instance.Paddle;
+                BallControl ballControl = Ball.GetComponent<BallControl>();
+                ballControl.paddle = GameManager.Instance.Paddle;
+                GameManager.Instance.ballList.Add(ballControl);
                 break;
             case BrickItemEffect.MagenticBall:
                 GameManager.Instance.Ball.GetComponent<BallControl>().MagneticBall();
