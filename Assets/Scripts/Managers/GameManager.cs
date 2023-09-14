@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject PaddlePrefab;
     public GameObject Paddle;
 
-    private List<BrickControl> _brickList = new List<BrickControl>();
+    public List<BrickControl> _brickList = new List<BrickControl>();
 
 
     private void Awake()
