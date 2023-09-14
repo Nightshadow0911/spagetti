@@ -72,8 +72,12 @@ public class ItemBrick : MonoBehaviour
         float random = Random.Range(0f, 1f);
         if (random < 0.2f)
         {
-            BrickItemEffect selectedeffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
-            ApplyItemEffect(selectedeffect); // 선택된 효과를 적용
+            if (GameManager.Instance.Ball != null && GameManager.Instance.Paddle != null)
+            {
+                BrickItemEffect selectedeffect = ChooseItemEffect(); // 랜덤 아이템 효과 선택
+                ApplyItemEffect(selectedeffect); // 선택된 효과를 적용
+            }
+            
             
         }
 
