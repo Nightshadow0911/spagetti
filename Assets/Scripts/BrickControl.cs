@@ -13,6 +13,7 @@ public enum BrickType
 
 public class BrickControl : MonoBehaviour
 {
+    [field : SerializeField]
     public int Life { get; private set; }
     public GameObject ball;
     private SpriteRenderer _renderer;
@@ -31,7 +32,7 @@ public class BrickControl : MonoBehaviour
 
     public void DecreaseLife(BallControl ball)
     {
-        Life -= ball.GetComponent<BallControl>().ballPower;
+        Life --;
         if (Life <= 0)
         {
             SoundManager.Instance.PlaySFX(SFX.Break);
